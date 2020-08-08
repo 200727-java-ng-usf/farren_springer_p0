@@ -1,15 +1,15 @@
 import java.util.Objects;
 
 /**
- * This class holds User objects.
+ * This class holds Member objects.
  */
-public class User {
+public class Member {
 
     private double balance;
     private String username;
     private String password;
 
-    public User(double balance, String username, String password) {
+    public Member(double balance, String username, String password) {
         this.balance = balance;
         this.username = username;
         this.password = password;
@@ -43,7 +43,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        Member user = (Member) o;
         return Double.compare(user.balance, balance) == 0 &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password);
