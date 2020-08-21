@@ -93,9 +93,5 @@ public class UserService {
         return true;
     }
 
-    // TODO method to withdraw funds
-    // TODO method to deposit funds
-    // TODO getbalance
-
 
 }
