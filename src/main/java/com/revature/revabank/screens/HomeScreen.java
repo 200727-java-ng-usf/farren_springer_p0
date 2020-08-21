@@ -1,40 +1,50 @@
 package com.revature.revabank.screens;
 
-import com.revature.revabank.models.AppUser;
+import com.revature.revabank.repos.UserRepository;
 import com.revature.revabank.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class HomeScreen extends Screen{
+import static com.revature.revabank.AppDriver.app;
 
-    // Inject the dependency through the constructor (constructor injection)
-    public HomeScreen(UserService userService) {
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+public class HomeScreen extends Screen {
 
+    public HomeScreen() {
+        super("HomeScreen", "/home");
+        System.out.println("[LOG] - Instantiating " + super.getName());
     }
 
-    /**
-     * Renders the home screen menu to the console.
-     */
     @Override
     public void render() {
 
-        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Welcome to Revabooks!\n");
+        System.out.println("1) Login");
+        System.out.println("2) Register");
+        System.out.println("3) Exit Application");
 
         try {
-            System.out.println("This is the Home Screen.");
+            System.out.print("> ");
+            String userSelection = app.getConsole().readLine();
 
-
-            AppUser somethingUser;
-            System.out.println("Print something here.");
+            switch (userSelection) {
+                case "1":
+//                    new LoginScreen(new UserService(new UserRepository())).render();
+                    app.getRouter().navigate("/login");
+                    break;
+                case "2":
+                    app.getRouter().navigate("/register");
+                    break;
+                case "3":
+                    app.setAppRunning(false);
+                    break;
+                default:
+                    System.out.println("[LOG] - Invalid selection!");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-}
-
-
+    }
 
 }

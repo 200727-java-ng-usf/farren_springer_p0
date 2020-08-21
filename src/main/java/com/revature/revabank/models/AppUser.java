@@ -1,4 +1,4 @@
-package com.revature.revabooks.models;
+package com.revature.revabank.models;
 
 import com.revature.revabank.models.Role;
 

@@ -1,10 +1,14 @@
 package com.revature.revabank.screens;
 
+import com.revature.revabank.exceptions.AuthenticationException;
+import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
+import static com.revature.revabank.AppDriver.app;
 
 public class LoginScreen extends Screen {
 
@@ -13,6 +17,7 @@ public class LoginScreen extends Screen {
 
     // Inject the dependency through the constructor (constructor injection)
     public LoginScreen(UserService userService) {
+        super("LoginScreen", "/login");
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
@@ -27,22 +32,28 @@ public class LoginScreen extends Screen {
      */
     @Override
     public void render() {
-
-        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
         String username, password;
 
         try {
             System.out.println("Please provide your login credentials");
             System.out.print("Username: ");
-            username = console.readLine();
+            username = app.getConsole().readLine();
             System.out.print("Password: ");
-            password = console.readLine();
+            password = app.getConsole().readLine();
 
-            AppUser authUser = userService.authenticate(username, password);
-            System.out.println(authUser);
+            userService.authenticate(username, password);
 
+            if (app.isSessionValid()) {
+                app.getRouter().navigate("/dashboard");
+            }
+
+        } catch (InvalidRequestException | AuthenticationException e) {
+            System.err.println("Invalid login credentials provided!");
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("[ERROR] - An unexpected exception occurred: " + e.getMessage());
+            System.out.println("[LOG] - Shutting down application");
+            app.setAppRunning(false);
         }
 
     }
