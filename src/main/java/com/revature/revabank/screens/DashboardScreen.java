@@ -18,11 +18,11 @@ public class DashboardScreen extends Screen {
         while (app.isSessionValid()) {
 
             System.out.println("\n\n+---------------------------------+\n");
-            System.out.println("1) Search Books");
-            System.out.println("2) My Favorite Books");
-            System.out.println("3) My Wish List");
-            System.out.println("4) Shopping Cart");
-            System.out.println("5) Edit Profile");
+            System.out.println("1) See Accounts");
+            System.out.println("2) Add, Withdraw, or See Funds");
+            System.out.println("3) Delete an Account");
+            System.out.println("4) Open a New Account");
+            System.out.println("5) Edit User Information");
             System.out.println("6) Sign Out");
 
             try {
@@ -32,19 +32,20 @@ public class DashboardScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
-                        app.getRouter().navigate("/search");
+                        System.out.println("See Accounts screen under construction...");
                         break;
                     case "2":
-                        System.err.println("FavoritesScreen under construction...");
+                        System.err.println("Add, Withdraw, or See Funds Screen under construction...");
                         break;
                     case "3":
-                        System.err.println("WishlistScreen under construction...");
+                        System.err.println("Delete An Account Screen under construction...");
                         break;
                     case "4":
-                        System.err.println("ShoppingCartScreen under construction...");
+                        System.err.println("Open a New Account Screen under construction...");
                         break;
                     case "5":
-                        app.getRouter().navigate("/profile");
+                        System.out.println("Edit User Information Screen under construction...");
+//                        app.getRouter().navigate("/profile");
                         break;
                     case "6":
                         System.out.println(app.getCurrentUser().getUsername() + " signing out...");
