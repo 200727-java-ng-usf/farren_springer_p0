@@ -176,6 +176,36 @@ public class AccountRepository {
         return null;
     }
 
+    public static Optional<Account> updateBalance(Account account, Double balance, Integer accountId) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE project0.accounts SET balance = " + balance + " WHERE id = " + accountId;
+
+            // second parameter here is used to indicate column names that will have generated values
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.setString(1, account.getAccountType().toString());
+//            pstmt.setDouble(2, account.getBalance());
+//            pstmt.setInt(3, app.getCurrentUser().getId());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+//            if (rowsInserted != 0) {
+
+                ResultSet rs = pstmt.getGeneratedKeys();
+
+                rs.next();
+                account.setId(rs.getInt(1));
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return null;
+    }
+
     private Set<Account> mapResultSet(ResultSet rs) throws SQLException {
 
         Set<Account> accounts = new HashSet<>();

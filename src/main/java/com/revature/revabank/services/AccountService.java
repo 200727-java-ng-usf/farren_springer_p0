@@ -117,13 +117,14 @@ public class AccountService {
     public void withdrawFunds(Account account, Double amount) {
         account.setBalance(account.getBalance() - amount);
         System.out.println(account.getBalance());
+        // instead of saving, we want to edit the information in the db
         accountRepo.save(account);
     }
 
     public void depositFunds(Account account, Double amount) {
         account.setBalance(account.getBalance() + amount);
         System.out.println(account.getBalance());
-        accountRepo.save(account);
+        accountRepo.updateBalance(account, account.getBalance(), account.getId());
     }
 
     // TODO use this method as an option for user
