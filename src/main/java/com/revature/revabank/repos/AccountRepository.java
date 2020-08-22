@@ -49,15 +49,14 @@ public class AccountRepository {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO project0.accounts (account_type, balance, holder_name, account_number) " +
-                    "VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO project0.accounts (account_type, balance, holder_name) " +
+                    "VALUES (?, ?, ?)";
 
             // second parameter here is used to indicate column names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"});
             pstmt.setString(1, account.getAccountType().toString());
             pstmt.setDouble(2, account.getBalance());
             pstmt.setString(3, account.getHolderName());
-            pstmt.setInt(4, account.getAccountNumber());
 
             int rowsInserted = pstmt.executeUpdate();
 

@@ -9,7 +9,6 @@ public class Account {
      * Account fields
      */
     private Integer id;
-    private Integer accountNumber;
     private Double balance;
     private AppUser appUser;
     private AccountType accountType;
@@ -24,11 +23,9 @@ public class Account {
 
     /**
      * Constructor
-     * @param accountNumber
      * @param balance
      */
-    public Account(Integer accountNumber, Double balance) {
-        this.accountNumber = accountNumber;
+    public Account(Double balance) {
         this.balance = balance;
         this.appUser = new AppUser();
         this.accountType = accountType.CHECKING;
@@ -36,12 +33,11 @@ public class Account {
 
     /**
      * Constructor
-     * @param accountNumber
      * @param balance
      * @param appUser
      */
-    public Account(Integer accountNumber, Double balance, AppUser appUser) {
-        this(accountNumber, balance);
+    public Account(Double balance, AppUser appUser) {
+        this(balance);
         this.appUser = new AppUser();
         this.accountType = accountType.CHECKING;
     }
@@ -49,20 +45,19 @@ public class Account {
     /**
      * Constructor for all fields
      * @param id
-     * @param accountNumber
      * @param balance
      * @param appUser
      * @param accountType
      */
-    public Account(Integer id, Integer accountNumber, Double balance, AppUser appUser, AccountType accountType) {
-        this(accountNumber, balance, appUser);
+    public Account(Integer id, Double balance, AppUser appUser, AccountType accountType) {
+        this(balance, appUser);
         this.id = id;
         this.accountType = accountType.CHECKING;
     }
 
     // copy constructor (used for conveniently copying the values of one AppUser to create a new instance with those values)
     public Account(Account copy) {
-        this(copy.id, copy.accountNumber, copy.balance, copy.appUser, copy.accountType);
+        this(copy.id, copy.balance, copy.appUser, copy.accountType);
     }
 
 
@@ -75,14 +70,6 @@ public class Account {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(Integer accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public Double getBalance() {
@@ -127,21 +114,19 @@ public class Account {
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
         return Objects.equals(id, account.id) &&
-                Objects.equals(accountNumber, account.accountNumber) &&
                 Objects.equals(balance, account.balance) &&
                 Objects.equals(appUser, account.appUser);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, accountNumber, balance, appUser);
+        return Objects.hash(id, balance, appUser);
     }
 
     @Override
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", accountNumber=" + accountNumber +
                 ", balance=" + balance +
                 ", appUser=" + appUser +
                 '}';
