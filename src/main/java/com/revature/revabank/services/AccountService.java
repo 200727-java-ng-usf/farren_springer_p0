@@ -7,6 +7,8 @@ import com.revature.revabank.models.AppUser;
 import com.revature.revabank.models.Role;
 import com.revature.revabank.repos.AccountRepository;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.*;
 
 import static com.revature.revabank.AppDriver.app;
@@ -114,11 +116,19 @@ public class AccountService {
 
     }
 
-    public void withdrawFunds(Account account, Double amount) {
+    public void withdrawFunds(Account account, Double amount) throws IOException {
+        /**
+         * To check for overdraw, use an if statement
+         */
+        while (amount > account.getBalance()) {
+            System.out.println("Cannot overdraw from account! Try again...");
+            System.out.println("How much would you like to withdraw: ");
+            amount = Double.valueOf(app.getConsole().readLine());
+        }
         account.setBalance(account.getBalance() - amount);
         System.out.println(account.getBalance());
         // instead of saving, we want to edit the information in the db
-        accountRepo.save(account);
+        accountRepo.updateBalance(account, account.getBalance(), account.getId());
     }
 
     public void depositFunds(Account account, Double amount) {

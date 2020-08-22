@@ -120,6 +120,8 @@ public class DepositWithdrawalOrViewScreen extends Screen {
 
                         accountService.authenticateAccount(app.getCurrentUser().getId());
 
+                        System.out.println("Going back to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
+
                         if (app.isSessionValid()) {
                             app.getRouter().navigate("/dashboard");
                         }

@@ -1,5 +1,6 @@
 package com.revature.revabank.models;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Objects;
 
@@ -85,9 +86,10 @@ public class Account {
 
     @Override
     public String toString() {
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
         return "Account{" +
                 "id=" + id +
-                ", balance=" + balance +
+                ", balance= " + numberFormat.format(balance) +
                 ", accountType=" + accountType +
                 ", user_id=" + user_id +
                 '}';
