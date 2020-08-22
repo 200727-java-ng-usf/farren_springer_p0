@@ -188,14 +188,15 @@ public class AccountRepository {
 //            pstmt.setDouble(2, account.getBalance());
 //            pstmt.setInt(3, app.getCurrentUser().getId());
 
-            int rowsInserted = pstmt.executeUpdate();
+//            int rowsInserted =
+                    pstmt.executeUpdate();
 
 //            if (rowsInserted != 0) {
 
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 rs.next();
-                account.setId(rs.getInt(1));
+//                account.setId(rs.getInt(1));
 
 //            }
 
