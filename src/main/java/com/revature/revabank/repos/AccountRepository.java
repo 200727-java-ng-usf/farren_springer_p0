@@ -1,6 +1,7 @@
 package com.revature.revabank.repos;
 
 import com.revature.revabank.models.Account;
+import com.revature.revabank.models.AccountType;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.util.ConnectionFactory;
 
@@ -15,34 +16,32 @@ import java.util.Set;
 public class AccountRepository {
 
     // extract common query clauses into a easily referenced member for reusability.
-    private String baseQuery = "SELECT * FROM project0.app_users au " +
-            "JOIN project0.user_roles ur " +
-            "ON au.role_id = ur.id ";
+    private String baseQuery = "SELECT * FROM project0.accounts a";
 
     public AccountRepository() {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
-    public Optional<AppUser> findAccountByAccountNumber(int accountNumber) {
+    public Optional<Account> findAccountByAccountId(int id) {
 
-        Optional<AppUser> _user = Optional.empty();
+        Optional<Account> _account = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = baseQuery + "WHERE username = ? AND password = ?";
+            String sql = baseQuery + "WHERE id = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, accountNumber);
+            pstmt.setInt(1, id);
 
             ResultSet rs = pstmt.executeQuery();
 
-            _user = mapResultSet(rs).stream().findFirst();
+            _account = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
 
-        return _user;
+        return _account;
     }
 
     public static Optional<Account> save(Account account) {
@@ -76,22 +75,21 @@ public class AccountRepository {
         return null;
     }
 
-    private Set<AppUser> mapResultSet(ResultSet rs) throws SQLException {
+    private Set<Account> mapResultSet(ResultSet rs) throws SQLException {
 
-        Set<AppUser> users = new HashSet<>();
+        Set<Account> accounts = new HashSet<>();
 
         while (rs.next()) {
-            AppUser temp = new AppUser();
+            Account temp = new Account();
             temp.setId(rs.getInt("id"));
-            temp.setFirstName(rs.getString("account_type"));
-            temp.setLastName(rs.getString("balance"));
-            temp.setUsername(rs.getString("holder_name"));
-            temp.setPassword(rs.getString("account_holder"));
+            temp.setAccountType((AccountType) rs.getObject("account_type"));
+            temp.setBalance(rs.getDouble("balance"));
+            temp.setHolderName(rs.getString("holder_name"));
             System.out.println(temp);
-            users.add(temp);
+            accounts.add(temp);
         }
 
-        return users;
+        return accounts;
 
     }
 

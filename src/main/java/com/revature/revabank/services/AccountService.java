@@ -66,6 +66,7 @@ public class AccountService {
         accountRepo.save(newAccount);
         System.out.println(newAccount);
 //        app.setCurrentUser(newUser);
+        app.setCurrentAccount(newAccount);
 
     }
 

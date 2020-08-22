@@ -1,9 +1,15 @@
 package com.revature.revabank.screens;
 
+import com.revature.revabank.exceptions.AuthenticationException;
+import com.revature.revabank.models.Account;
+import com.revature.revabank.models.AppUser;
+import com.revature.revabank.repos.AccountRepository;
+
 import static com.revature.revabank.AppDriver.*;
 
 public class DashboardScreen extends Screen {
 
+    private static AccountRepository accountRepo;
     /**
      * Constructor
      */
@@ -34,13 +40,8 @@ public class DashboardScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
-                        System.err.println("Add to, Withdraw from, or See Accounts Screen under construction...");
-                        System.err.println("Can only deposit funds right now...");
-                        System.out.println("Amount to Deposit: ");
-                        userSelection = app.getConsole().readLine();
-                        Double depositAmount = Double.parseDouble(userSelection);
-                        // TODO create getcurrentAccount method to call here and adjust balance
-                        app.getCurrentAccount().setBalance(app.getCurrentAccount().getBalance() + depositAmount);
+                        System.out.println("Navigating to SeeAccountsScreen...");
+                        app.getRouter().navigate("/seeAccounts");
                         break;
                     case "2":
                         System.out.println("Navigating to New Account Screen...");
