@@ -12,19 +12,33 @@ public class ConnectionFactory {
         super();
     }
 
+    /**
+     * Since connFactory is a private field, we need a getter method to access it
+     * @return
+     */
     public static ConnectionFactory getInstance() {
         return connFactory;
     }
 
+    /**
+     * the getConnection method loads the JDB and connects to the remote db.
+     * @return
+     */
     public Connection getConnection() {
 
         Connection conn = null;
 
         try {
 
-            // Force the JVM to load the PostGreSQL JDBC driver
+            /**
+             * Load and Register the Driver.
+             * Force the JVM to load the PostGreSQL JDBC driver
+             */
             Class.forName("org.postgresql.Driver");
 
+            /**
+             * Create a Connection
+             */
             conn = DriverManager.getConnection(
                     "jdbc:postgresql://java-ng-usf-200727.czcb2bh9usg6.us-east-2.rds.amazonaws.com:5432/postgres",
                     "postgres",
@@ -42,6 +56,11 @@ public class ConnectionFactory {
 
     }
 
+    /**
+     * We do not want to clone any instances.
+     * @return
+     * @throws CloneNotSupportedException
+     */
     @Override
     protected Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException();

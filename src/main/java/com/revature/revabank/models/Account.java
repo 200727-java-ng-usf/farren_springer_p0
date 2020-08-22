@@ -33,14 +33,14 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public Account(Integer id, Double balance, AccountType accountType, Integer user_id) {
+    public Account(Integer id, AccountType accountType, Double balance, Integer user_id) {
         this(accountType, balance,user_id);
         this.id = id;
     }
 
     // copy constructor (used for conveniently copying the values of one AppUser to create a new instance with those values)
     public Account(Account copy) {
-        this(copy.id, copy.balance, copy.accountType, copy.user_id);
+        this(copy.id,  copy.accountType, copy.balance,copy.user_id);
     }
 
 

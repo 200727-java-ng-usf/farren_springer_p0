@@ -27,19 +27,19 @@ public class AccountService {
      * authorized account found using the accountRepo.
      * @param id
      */
-    public void authenticate(Integer id) {
-
-        // validate that the provided username and password are not non-values
-        if (id == 0 || id.equals("") ) {
-            throw new InvalidRequestException("Invalid credential values provided!");
-        }
-
-        Account authAccount = accountRepo.findAccountByAccountId(id)
-                .orElseThrow(AuthenticationException::new);
-
-        app.setCurrentAccount(authAccount);
-
-    }
+//    public void authenticate(Integer id) {
+//
+//        // validate that the provided username and password are not non-values
+//        if (id == 0 || id.equals("") ) {
+//            throw new InvalidRequestException("Invalid credential values provided!");
+//        }
+//
+//        Account authAccount = accountRepo.findAccountByAccountId(id)
+//                .orElseThrow(AuthenticationException::new);
+//
+//        app.setCurrentAccount(authAccount);
+//
+//    }
 
     public void register(Account newAccount) {
 
@@ -47,11 +47,12 @@ public class AccountService {
             throw new InvalidRequestException("Invalid account field values provided during registration!");
         }
 
-        Optional<Account> existingAccount = accountRepo.findAccountByAccountId(newAccount.getId());
-        if (existingAccount.isPresent()) {
-            // TODO implement a custom ResourcePersistenceException
-            throw new RuntimeException("Provided username is already in use!");
-        }
+//        System.out.println("This is the account id: " + accountRepo.findAccountByAccountId(newAccount.getId()));
+//        Optional<Account> existingAccount = accountRepo.findAccountByAccountId(newAccount.getId());
+//        if (existingAccount.isPresent()) {
+//            // TODO implement a custom ResourcePersistenceException
+//            throw new RuntimeException("Provided username is already in use!");
+//        }
 
 //        newAccount.setAccountType(AccountType.CHECKING);
         accountRepo.save(newAccount);

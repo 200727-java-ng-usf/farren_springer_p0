@@ -4,11 +4,13 @@ import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.repos.AccountRepository;
+import com.revature.revabank.repos.UserRepository;
 
 import static com.revature.revabank.AppDriver.*;
 
 public class DashboardScreen extends Screen {
 
+    private static UserRepository userRepo;
     private static AccountRepository accountRepo;
     /**
      * Constructor
@@ -26,7 +28,7 @@ public class DashboardScreen extends Screen {
 
         while (app.isSessionValid()) {
 
-            System.out.println("\n\n+---------------------------------+\n");
+            System.out.println("\n+---------------------------------+\n");
             System.out.println("1) Add to, Withdraw from, or See Accounts");
             System.out.println("2) Open a New Account");
             System.out.println("3) Delete an Account");

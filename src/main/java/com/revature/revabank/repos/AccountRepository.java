@@ -17,34 +17,41 @@ import static com.revature.revabank.AppDriver.app;
 
 public class AccountRepository {
 
-    // extract common query clauses into a easily referenced member for reusability.
-    private String baseQuery = "SELECT * FROM project0.accounts a";
+    /**
+     * Extract common query clauses into a easily referenced member for reusability.
+     * This base query selects all from the accounts table in schema project0
+     */
+    private String baseQuery = "SELECT * FROM project0.accounts a " +
+            "JOIN project0.app_users au " +
+            "ON a.user_id = au.id ";
 
+    /**
+     * Breadcrumbs
+     */
     public AccountRepository() {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
-    public Optional<Account> findAccountByAccountId(int id) {
-
-        Optional<Account> _account = Optional.empty();
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = baseQuery + "WHERE id = ?";
-
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-
-            ResultSet rs = pstmt.executeQuery();
-
-            _account = mapResultSet(rs).stream().findFirst();
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return _account;
-    }
+//    public Optional<Account> findAccountByAccountId(Integer id) {
+//
+//        Optional<Account> _account = Optional.empty();
+//
+//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+//
+//            String sql = baseQuery + "WHERE id = ?";
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.setInt(1, id);
+//
+//            ResultSet rs = pstmt.executeQuery();
+//
+//            _account = mapResultSet(rs).stream().findFirst();
+//
+//        } catch (SQLException sqle) {
+//            sqle.printStackTrace();
+//        }
+//
+//        return _account;
+//    }
 
     public static Optional<Account> save(Account account) {
 

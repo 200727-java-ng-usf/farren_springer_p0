@@ -6,7 +6,9 @@ import java.util.Objects;
 
 public class AppUser {
 
-    // fields/attributes
+    /**
+     * AppUsers have these fields. Id is serialized.
+     */
     private Integer id;
     private String firstName;
     private String lastName;
@@ -44,7 +46,10 @@ public class AppUser {
         this(copy.id, copy.firstName, copy.lastName, copy.username, copy.password, copy.email, copy.role);
     }
 
-    // getters and setters
+    /**
+     * Public getters and setters for private AppUser fields
+     * @return
+     */
     public Integer getId() {
         return id;
     }
@@ -101,7 +106,11 @@ public class AppUser {
         this.role = role;
     }
 
-    // overridden Object methods
+    /**
+     * Overridden object methods
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
