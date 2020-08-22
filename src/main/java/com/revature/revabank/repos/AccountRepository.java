@@ -16,6 +16,9 @@ import java.util.stream.Collectors;
 
 import static com.revature.revabank.AppDriver.app;
 
+/**
+ * AccountRepository contains methods that access the db through SQL query result sets.
+ */
 public class AccountRepository {
 
     /**
@@ -33,19 +36,19 @@ public class AccountRepository {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
-    public Optional<Account> findAccountByAccountId(Integer id) {
+    public Optional<Account> findAccountByAccountId(Integer accountId) {
 
         Optional<Account> _account = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = baseQuery + "WHERE id = ?";
+            String sql = baseQuery + "WHERE a.id = ?";
 
             /**
              * PreparedStatement to assign to a ResultSet Object
              */
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, accountId);
 
             /**
              * ExecuteQuery
@@ -133,7 +136,7 @@ public class AccountRepository {
         while (rs.next()) {
             Account temp = new Account();
             temp.setId(rs.getInt("id"));
-            temp.setAccountType((AccountType) rs.getObject("account_type"));
+            temp.setAccountType(AccountType.getByName(rs.getString("account_type")));
             temp.setBalance(rs.getDouble("balance"));
             temp.setUser_id(rs.getInt("user_id"));
             System.out.println(temp);

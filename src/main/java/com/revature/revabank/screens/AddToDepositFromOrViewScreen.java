@@ -96,7 +96,8 @@ public class AddToDepositFromOrViewScreen extends Screen {
                         // authenticate for each account found where user_id matches app_user id column?
 //                        accountService.authenticate(app.getCurrentUser().getId());
                         System.out.println(app.getCurrentUser().toString());
-                        System.out.println(accountRepo.findAllAccountsWithAppUserId(app.getCurrentUser().getId()).toString());
+                        accountService.authenticate(app.getCurrentUser().getId());
+                        System.out.println(app.getCurrentAccount().getBalance());
                         // for the number of accounts that have the user's id as their
                         // user_id...
                         // print the toString for those accounts.
