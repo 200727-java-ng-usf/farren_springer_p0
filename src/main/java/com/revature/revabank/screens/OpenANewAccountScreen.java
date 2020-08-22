@@ -75,7 +75,14 @@ public class OpenANewAccountScreen extends Screen {
                         }
                         break;
                     case "2":
-                        System.err.println("Creating a Savings Account under construction...");
+                        System.out.println("Creating a Savings Account...");
+                        newAccount = new Account(1, 100, 0.00d, app.getCurrentUser(), AccountType.SAVINGS);
+                        AccountService.register(newAccount);
+                        System.out.println("Account created with: " + newAccount.getBalance());
+
+                        if (app.isSessionValid()) {
+                            app.getRouter().navigate("/dashboard");
+                        }
                         break;
                     case "3":
                         System.out.println(app.getCurrentUser().getUsername() + " going back to Dashboard......");
