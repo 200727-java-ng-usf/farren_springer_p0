@@ -3,11 +3,7 @@ package com.revature.revabank.services;
 import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.Account;
-import com.revature.revabank.models.AccountType;
-import com.revature.revabank.models.AppUser;
-import com.revature.revabank.models.Role;
 import com.revature.revabank.repos.AccountRepository;
-import com.revature.revabank.repos.UserRepository;
 
 import java.util.*;
 
@@ -41,12 +37,21 @@ public class AccountService {
 
     }
 
+    /**
+     * Creates a new row in the accounts table in the project0 db through the save
+     * method, first checking if the account already exists.
+     * @param newAccount
+     */
     public void register(Account newAccount) {
 
         if (!isAccountValid(newAccount)) {
             throw new InvalidRequestException("Invalid account field values provided during registration!");
         }
 
+        /**
+         * Right now the method does not check if the account already exists...
+         * Maybe make sure users do not create 1399429 accounts (set a limit).
+         */
 //        System.out.println("This is the account id: " + accountRepo.findAccountByAccountId(newAccount.getId()));
 //        Optional<Account> existingAccount = accountRepo.findAccountByAccountId(newAccount.getId());
 //        if (existingAccount.isPresent()) {
@@ -55,9 +60,14 @@ public class AccountService {
 //        }
 
 //        newAccount.setAccountType(AccountType.CHECKING);
+        /**
+         * Saves the account, prints it, and sets the current account to the
+         * new account (maybe don't need to set it as current since this is
+         * done when they want to make a withdrawal or deposit
+         */
         accountRepo.save(newAccount);
         System.out.println(newAccount);
-        app.setCurrentAccount(newAccount);
+        app.setCurrentAccount(newAccount); // may be redundant
 
     }
 
@@ -79,6 +89,24 @@ public class AccountService {
 
     public boolean update(Account updatedAccount) {
         return false;
+    }
+
+    // TODO method that returns all accounts with a user_id that matches the currentUser's id
+    public Set<Optional<Account>> getAllAccountsUnderUserId() {
+
+        Set<Optional<Account>> accountsUnderAppUser = null;
+
+        for(int i = 0; i < 100; i++) {
+            accountsUnderAppUser.add(accountRepo.findAccountByAccountId(app.getCurrentUser().getId()));
+        }
+
+
+        // parse through all accounts
+        // if account id matches appUser.getId()...
+        // then add that account to the Set<Account>
+
+        return accountsUnderAppUser;
+
     }
 
     // TODO method to withdraw funds

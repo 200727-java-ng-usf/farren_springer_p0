@@ -2,7 +2,6 @@ package com.revature.revabank.repos;
 
 import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AccountType;
-import com.revature.revabank.models.AppUser;
 import com.revature.revabank.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -12,7 +11,6 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.revature.revabank.AppDriver.app;
 
@@ -36,6 +34,13 @@ public class AccountRepository {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
+    /**
+     * Find an account by its accountId.
+     * Used to authenticate that an account exists in the authenticate
+     * method in AccountService.
+     * @param accountId
+     * @return
+     */
     public Optional<Account> findAccountByAccountId(Integer accountId) {
 
         Optional<Account> _account = Optional.empty();
@@ -67,9 +72,16 @@ public class AccountRepository {
         return _account;
     }
 
-    public Set<Account> findAllAccountsWithAppUserId(Integer appUserId) {
+    /**
+     * FindAccountWithAppUserId returns one Optional object.
+     *
+     * This method will be used in the Account Service to find the next instance of an
+     * account with a user_id that matches the AppUser's id.
+     * @return
+     */
+    public Optional<Account> findAccountsWithAppUserId() {
 
-        Set<Account> accounts = null;
+        Optional<Account> accounts = null;
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -79,7 +91,7 @@ public class AccountRepository {
              * PreparedStatement to assign to a ResultSet Object
              */
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, appUserId);
+            pstmt.setInt(1, app.getCurrentUser().getId());
 
             /**
              * ExecuteQuery
@@ -89,7 +101,7 @@ public class AccountRepository {
             /**
              * Map the result set to the Optional<Account>
              */
-            accounts = mapResultSet(rs).stream().collect(Collectors.toSet());
+            accounts = mapResultSet(rs).stream().findAny();
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();

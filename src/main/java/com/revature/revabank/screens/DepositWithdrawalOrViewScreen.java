@@ -16,7 +16,7 @@ import java.util.List;
 
 import static com.revature.revabank.AppDriver.app;
 
-public class AddToDepositFromOrViewScreen extends Screen {
+public class DepositWithdrawalOrViewScreen extends Screen {
 
     /**
      * AccountService is a dependency to the OpenANewAccountScreen
@@ -25,8 +25,8 @@ public class AddToDepositFromOrViewScreen extends Screen {
     private static AccountRepository accountRepo;
 
     // Inject the dependency through the constructor (constructor injection)
-    public AddToDepositFromOrViewScreen(AccountService accountService) {
-        super("SeeAccounts", "/seeAccounts");
+    public DepositWithdrawalOrViewScreen(AccountService accountService) {
+        super("DespotWithdrawalOrView", "/depositWithdrawalOrView");
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
@@ -89,9 +89,6 @@ public class AddToDepositFromOrViewScreen extends Screen {
                     case "3":
                         System.out.println("View Balances under construction...");
                         System.out.println("Here are your accounts: ");
-
-                        // SELECT * from project0.accounts WHERE id = ?
-                        // make ? the app.getcurrentUser().getId()
 
                         // authenticate for each account found where user_id matches app_user id column?
 //                        accountService.authenticate(app.getCurrentUser().getId());

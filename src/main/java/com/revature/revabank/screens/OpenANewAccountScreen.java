@@ -70,7 +70,7 @@ public class OpenANewAccountScreen extends Screen {
 
                         System.out.println("Creating a Checking Account...");
 
-                        Account newCheckingAccount = new Account(27, AccountType.CHECKING, 0.00d, app.getCurrentUser().getId());
+                        Account newCheckingAccount = new Account(AccountType.CHECKING, app.getCurrentUser().getId(), 0.00d);
                         accountService.register(newCheckingAccount);
 
                         System.out.println("Account created with: " + newCheckingAccount.getBalance());
@@ -83,7 +83,7 @@ public class OpenANewAccountScreen extends Screen {
 
                         System.out.println("Creating a Savings Account...");
 
-                        Account newSavingsAccount = new Account(38, AccountType.SAVINGS, 0.00d, app.getCurrentUser().getId());
+                        Account newSavingsAccount = new Account(AccountType.SAVINGS, app.getCurrentUser().getId(), 0.00d);
                         accountService.register(newSavingsAccount);
 
                         System.out.println("Account created with: " + newSavingsAccount.getBalance());

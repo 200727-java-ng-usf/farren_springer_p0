@@ -23,24 +23,24 @@ public class Account {
     }
 
 
-    public Account(Double balance, Integer user_id) {
-        this.balance = balance;
-        this.user_id = app.getCurrentUser().getId();
-    }
-
-    public Account( AccountType accountType, Double balance,Integer user_id) {
-        this(balance, user_id);
+    public Account(AccountType accountType, Integer user_id) {
         this.accountType = accountType;
+        this.user_id = user_id;
     }
 
-    public Account(Integer id, AccountType accountType, Double balance, Integer user_id) {
-        this(accountType, balance,user_id);
+    public Account( AccountType accountType, Integer user_id, Double balance) {
+        this(accountType, user_id);
+        this.balance = balance;
+    }
+
+    public Account(Integer id, AccountType accountType, Integer user_id, Double balance) {
+        this(accountType, user_id, balance);
         this.id = id;
     }
 
     // copy constructor (used for conveniently copying the values of one AppUser to create a new instance with those values)
     public Account(Account copy) {
-        this(copy.id,  copy.accountType, copy.balance,copy.user_id);
+        this(copy.id, copy.accountType, copy.user_id, copy.balance);
     }
 
 
