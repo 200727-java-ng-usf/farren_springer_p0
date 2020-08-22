@@ -117,11 +117,13 @@ public class AccountService {
     public void withdrawFunds(Account account, Double amount) {
         account.setBalance(account.getBalance() - amount);
         System.out.println(account.getBalance());
+        accountRepo.save(account);
     }
 
     public void depositFunds(Account account, Double amount) {
         account.setBalance(account.getBalance() + amount);
         System.out.println(account.getBalance());
+        accountRepo.save(account);
     }
 
     // TODO use this method as an option for user
