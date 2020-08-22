@@ -2,8 +2,10 @@ package com.revature.revabank.services;
 
 import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
+import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.models.Role;
+import com.revature.revabank.repos.AccountRepository;
 import com.revature.revabank.repos.UserRepository;
 
 import java.util.*;
@@ -20,6 +22,12 @@ public class UserService {
 //        userRepo = new UserRepository(); // tight coupling! ~hard~ impossible to unit test
     }
 
+    /**
+     * Validates that the user exists, finds the user, and sets the currentUser to the authorized user found
+     * using the userRepo.
+     * @param username
+     * @param password
+     */
     public void authenticate(String username, String password) {
 
         // validate that the provided username and password are not non-values

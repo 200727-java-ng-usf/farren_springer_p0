@@ -3,6 +3,8 @@ package com.revature.revabank.models;
 import java.util.List;
 import java.util.Objects;
 
+import static com.revature.revabank.AppDriver.app;
+
 public class Account {
 
     /**
@@ -10,9 +12,8 @@ public class Account {
      */
     private Integer id;
     private Double balance;
-    private AppUser appUser;
     private AccountType accountType;
-    private String holderName;
+    private Integer user_id;
 
     /**
      * No-args constructor
@@ -21,88 +22,46 @@ public class Account {
         super();
     }
 
-    /**
-     * Constructor
-     * @param balance
-     */
-    public Account(Double balance) {
+
+    public Account(Double balance, Integer user_id) {
         this.balance = balance;
-        this.appUser = new AppUser();
-        this.accountType = accountType.CHECKING;
+        this.user_id = app.getCurrentUser().getId();
     }
 
-    /**
-     * Constructor
-     * @param balance
-     * @param appUser
-     */
-    public Account(Double balance, AppUser appUser) {
-        this(balance);
-        this.appUser = new AppUser();
-        this.accountType = accountType.CHECKING;
+    public Account( AccountType accountType, Double balance,Integer user_id) {
+        this(balance, user_id);
+        this.accountType = accountType;
     }
 
-    /**
-     * Constructor for all fields
-     * @param id
-     * @param balance
-     * @param appUser
-     * @param accountType
-     */
-    public Account(Integer id, Double balance, AppUser appUser, AccountType accountType) {
-        this(balance, appUser);
+    public Account(Integer id, Double balance, AccountType accountType, Integer user_id) {
+        this(accountType, balance,user_id);
         this.id = id;
-        this.accountType = accountType.CHECKING;
     }
 
     // copy constructor (used for conveniently copying the values of one AppUser to create a new instance with those values)
     public Account(Account copy) {
-        this(copy.id, copy.balance, copy.appUser, copy.accountType);
+        this(copy.id, copy.balance, copy.accountType, copy.user_id);
     }
 
 
     /**
      * Getters and Setters
      */
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) { this.id = id; }
 
-    public Double getBalance() {
-        return balance;
-    }
+    public Double getBalance() { return balance; }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
+    public void setBalance(Double balance) { this.balance = balance; }
 
-    public AppUser getAppUser() {
-        return appUser;
-    }
+    public AccountType getAccountType() { return accountType; }
 
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
+    public void setAccountType(AccountType accountType) { this.accountType = accountType; }
 
-    public AccountType getAccountType() {
-        return accountType;
-    }
+    public Integer getUser_id() { return user_id; }
 
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
-    }
-
-    public String getHolderName() {
-        return holderName;
-    }
-
-    public void setHolderName(String holderName) {
-        this.holderName = holderName;
-    }
+    public void setUser_id(Integer user_id) { this.user_id = user_id; }
 
     /**
      * overridden Object methods
@@ -115,12 +74,13 @@ public class Account {
         Account account = (Account) o;
         return Objects.equals(id, account.id) &&
                 Objects.equals(balance, account.balance) &&
-                Objects.equals(appUser, account.appUser);
+                accountType == account.accountType &&
+                Objects.equals(user_id, account.user_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, balance, appUser);
+        return Objects.hash(id, balance, accountType, user_id);
     }
 
     @Override
@@ -128,8 +88,9 @@ public class Account {
         return "Account{" +
                 "id=" + id +
                 ", balance=" + balance +
-                ", appUser=" + appUser +
+                ", accountType=" + accountType +
+                ", user_id=" + user_id +
                 '}';
     }
 
-}
+} // end class

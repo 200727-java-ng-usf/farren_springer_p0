@@ -56,7 +56,7 @@ public class DashboardScreen extends Screen {
                         break;
                     case "5":
                         System.out.println(app.getCurrentUser().getUsername() + " signing out...");
-                        app.invalidateCurrentSession();
+                        app.getRouter().navigate("/home");
                         break;
                     default:
                         System.out.println("Invalid Selection!");

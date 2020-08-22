@@ -41,7 +41,7 @@ public class OpenANewAccountScreen extends Screen {
     public void render() {
         // TODO try to create an account object
         String userSelection;
-        System.out.println("Rendering " + app.getCurrentUser().getFirstName() + "'s new Account...");
+        System.out.println("Rendering " + app.getCurrentUser().getFirstName() + "'s Open New Account Screen...");
 
         while (app.isSessionValid()) {
 
@@ -67,11 +67,12 @@ public class OpenANewAccountScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
+
                         System.out.println("Creating a Checking Account...");
-//                        Account newCheckingAccount = new Account(1, 0.00d, app.getCurrentUser(), AccountType.CHECKING);
-                        Account newCheckingAccount = new Account(0.00d);
-                        AccountService.register(newCheckingAccount);
-                        app.setCurrentAccount(newCheckingAccount);
+
+                        Account newCheckingAccount = new Account(AccountType.CHECKING, 0.00d, app.getCurrentUser().getId());
+                        accountService.register(newCheckingAccount);
+
                         System.out.println("Account created with: " + newCheckingAccount.getBalance());
 
                         if (app.isSessionValid()) {
@@ -80,10 +81,8 @@ public class OpenANewAccountScreen extends Screen {
                         break;
                     case "2":
                         System.out.println("Creating a Savings Account...");
-//                        Account newSavingsAccount = new Account(1, 0.00d, app.getCurrentUser(), AccountType.SAVINGS);
-                        Account newSavingsAccount = new Account(0.00d);
-                        AccountService.register(newSavingsAccount);
-                        app.setCurrentAccount(newSavingsAccount);
+                        Account newSavingsAccount = new Account(AccountType.SAVINGS, 0.00d, app.getCurrentUser().getId());
+                        accountService.register(newSavingsAccount);
                         System.out.println("Account created with: " + newSavingsAccount.getBalance());
 
                         if (app.isSessionValid()) {

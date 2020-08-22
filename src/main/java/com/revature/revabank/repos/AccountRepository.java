@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.revature.revabank.AppDriver.app;
+
 public class AccountRepository {
 
     // extract common query clauses into a easily referenced member for reusability.
@@ -48,14 +50,14 @@ public class AccountRepository {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO project0.accounts (account_type, balance, holder_name) " +
+            String sql = "INSERT INTO project0.accounts (account_type, balance, user_id) " +
                     "VALUES (?, ?, ?)";
 
             // second parameter here is used to indicate column names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"});
             pstmt.setString(1, account.getAccountType().toString());
             pstmt.setDouble(2, account.getBalance());
-            pstmt.setString(3, account.getHolderName());
+            pstmt.setInt(3, app.getCurrentUser().getId());
 
             int rowsInserted = pstmt.executeUpdate();
 
@@ -84,7 +86,7 @@ public class AccountRepository {
             temp.setId(rs.getInt("id"));
             temp.setAccountType((AccountType) rs.getObject("account_type"));
             temp.setBalance(rs.getDouble("balance"));
-            temp.setHolderName(rs.getString("holder_name"));
+            temp.setUser_id(rs.getInt("user_id"));
             System.out.println(temp);
             accounts.add(temp);
         }
