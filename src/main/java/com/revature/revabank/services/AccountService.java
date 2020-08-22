@@ -3,6 +3,8 @@ package com.revature.revabank.services;
 import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.Account;
+import com.revature.revabank.models.AppUser;
+import com.revature.revabank.models.Role;
 import com.revature.revabank.repos.AccountRepository;
 
 import java.util.*;
@@ -23,9 +25,9 @@ public class AccountService {
      * authorized account found using the accountRepo.
      * @param id
      */
-    public void authenticate(Integer id) {
+    public void authenticateByAccountId(Integer id) {
 
-        // validate that the provided username and password are not non-values
+        // validate that the provided Integer id is not null
         if (id == 0 || id.equals("") ) {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
@@ -52,14 +54,11 @@ public class AccountService {
          * Right now the method does not check if the account already exists...
          * Maybe make sure users do not create 1399429 accounts (set a limit).
          */
-//        System.out.println("This is the account id: " + accountRepo.findAccountByAccountId(newAccount.getId()));
 //        Optional<Account> existingAccount = accountRepo.findAccountByAccountId(newAccount.getId());
 //        if (existingAccount.isPresent()) {
-//            // TODO implement a custom ResourcePersistenceException
+            // TODO implement a custom ResourcePersistenceException
 //            throw new RuntimeException("Provided username is already in use!");
 //        }
-
-//        newAccount.setAccountType(AccountType.CHECKING);
         /**
          * Saves the account, prints it, and sets the current account to the
          * new account (maybe don't need to set it as current since this is
@@ -91,31 +90,35 @@ public class AccountService {
         return false;
     }
 
-    // TODO method that returns all accounts with a user_id that matches the currentUser's id
-    public Set<Optional<Account>> getAllAccountsUnderUserId() {
+    // method that returns all accounts with a user_id that matches the currentUser's id
 
-        Set<Optional<Account>> accountsUnderAppUser = null;
+    /**
+     * This method makes sure that the user has accounts. It will print those accounts
+     * to the console if they exist using the findAccountByUserId method.
+     * @param user_id
+     */
+    public void authenticateAccount(Integer user_id) {
 
-        for(int i = 0; i < 100; i++) {
-            accountsUnderAppUser.add(accountRepo.findAccountByAccountId(app.getCurrentUser().getId()));
+        // validate that the provided id is not a non-value
+        if (user_id == null ) {
+            throw new InvalidRequestException("Invalid credential values provided!");
         }
 
+        /**
+         * The findAccountByUserId prints ALL accounts that the user has made
+         */
+        Account authAccount = accountRepo.findAccountByUserId(user_id)
+                .orElseThrow(AuthenticationException::new);
 
-        // parse through all accounts
-        // if account id matches appUser.getId()...
-        // then add that account to the Set<Account>
-
-        return accountsUnderAppUser;
+        app.setCurrentAccount(authAccount);
 
     }
 
-    // TODO method to withdraw funds
     public void withdrawFunds(Account account, Double amount) {
         account.setBalance(account.getBalance() - amount);
         System.out.println(account.getBalance());
     }
 
-    // TODO method to deposit funds
     public void depositFunds(Account account, Double amount) {
         account.setBalance(account.getBalance() + amount);
         System.out.println(account.getBalance());

@@ -4,6 +4,7 @@ import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AccountType;
 import com.revature.revabank.util.ConnectionFactory;
 
+import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.revature.revabank.AppDriver.app;
 
@@ -79,9 +81,10 @@ public class AccountRepository {
      * account with a user_id that matches the AppUser's id.
      * @return
      */
-    public Optional<Account> findAccountsWithAppUserId() {
 
-        Optional<Account> accounts = null;
+    public Optional<Account> findAccountByUserId(Integer userIdFieldOfAccount) {
+
+        Optional<Account> account = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -91,7 +94,7 @@ public class AccountRepository {
              * PreparedStatement to assign to a ResultSet Object
              */
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, app.getCurrentUser().getId());
+            pstmt.setInt(1, userIdFieldOfAccount);
 
             /**
              * ExecuteQuery
@@ -101,7 +104,38 @@ public class AccountRepository {
             /**
              * Map the result set to the Optional<Account>
              */
-            accounts = mapResultSet(rs).stream().findAny();
+            account = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return account;
+    }
+
+    public Set<Account> findAllAccountsByUserId(Integer userIdFieldOfAccount) {
+
+        Set<Account> accounts = null;
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE user_id = ?";
+
+            /**
+             * PreparedStatement to assign to a ResultSet Object
+             */
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userIdFieldOfAccount);
+
+            /**
+             * ExecuteQuery
+             */
+            ResultSet rs = pstmt.executeQuery();
+
+            /**
+             * Map the result set to the Optional<Account>
+             */
+            accounts = mapResultSet(rs).stream().collect(Collectors.toSet());
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -109,6 +143,7 @@ public class AccountRepository {
 
         return accounts;
     }
+
 
     public static Optional<Account> save(Account account) {
 

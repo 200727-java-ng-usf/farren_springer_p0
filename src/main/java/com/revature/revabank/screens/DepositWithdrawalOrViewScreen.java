@@ -59,51 +59,66 @@ public class DepositWithdrawalOrViewScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
-//                        Double depositAmount;
-//                        System.out.println("Deposit Funds: ");
-//                        System.out.println("How much would you like to deposit: ");
-//                        depositAmount = Double.valueOf(app.getConsole().readLine());
-                        System.out.println("Deposit Funds under construction...");
-                        System.out.println(app.getCurrentAccount().toString());
+                        Integer userSelectionInteger = 0;
+                        Double depositAmount = 0.0d;
 
-                        // show the user's their accounts using the same as view accounts
-                        // ask them to input the accountId they would like to deposit to using a switch
-                        // statement
-                        // the switch statement should set the current account to that account
-                        // and take them to a screen that allows them to deposit
+                        System.out.println("Deposit Funds under construction...");
+
+                        System.out.println("Here are your accounts.");
+                        accountService.authenticateAccount(app.getCurrentUser().getId());
+
+                        System.out.println("Each account has an id.");
+                        System.out.println("Enter the id of the account from which you want to deposit funds: ");
+                        userSelectionInteger = Integer.parseInt(app.getConsole().readLine());
+
+                        accountService.authenticateByAccountId(userSelectionInteger);
+
+                        System.out.println("How much would you like to deposit: ");
+                        depositAmount = Double.parseDouble(app.getConsole().readLine());
+
+                        accountService.depositFunds(app.getCurrentAccount(), depositAmount);
+
+                        System.out.println(app.getCurrentAccount());
+
+                        System.out.println("Transaction complete...navigating to Dashboard...");
+
                         if (app.isSessionValid()) {
                             app.getRouter().navigate("/dashboard");
                         }
                         break;
                     case "2":
-                        System.out.println("Withdraw Funds under construction");
+
+                        Integer userSelectionIntegerCase2 = 0;
+                        Double withdrawalAmount = 0.0d;
+
+                        System.out.println("Withdraw Funds under construction...");
+
+                        System.out.println("Here are your accounts.");
+                        accountService.authenticateAccount(app.getCurrentUser().getId());
+
+                        System.out.println("Each account has an id.");
+                        System.out.println("Enter the id of the account from which you want to withdraw funds: ");
+                        userSelectionIntegerCase2 = Integer.parseInt(app.getConsole().readLine());
+
+                        accountService.authenticateByAccountId(userSelectionIntegerCase2);
+
+                        System.out.println("How much would you like to withdraw: ");
+                        withdrawalAmount = Double.parseDouble(app.getConsole().readLine());
+
+                        accountService.withdrawFunds(app.getCurrentAccount(), withdrawalAmount);
+
+                        System.out.println(app.getCurrentAccount());
+
+                        System.out.println("Transaction complete...navigating to Dashboard...");
+
                         if (app.isSessionValid()) {
                             app.getRouter().navigate("/dashboard");
                         }
-                        // show the user's their accounts using the same as view accounts
-                        // ask them to input the accountId they would like to withdraw from using
-                        // a switch statement
-                        // the switch statement should set the current account to that account
-                        // and take them to a screen that allows them to withdraw
                         break;
                     case "3":
-                        System.out.println("View Balances under construction...");
                         System.out.println("Here are your accounts: ");
 
-                        // authenticate for each account found where user_id matches app_user id column?
-//                        accountService.authenticate(app.getCurrentUser().getId());
-                        System.out.println(app.getCurrentUser().toString());
-                        accountService.authenticate(app.getCurrentUser().getId());
-                        System.out.println(app.getCurrentAccount().getBalance());
-                        // for the number of accounts that have the user's id as their
-                        // user_id...
-                        // print the toString for those accounts.
-                        // parse through the account list...
-                        // find the first instance of user_id matching the id of currentUser
-
-                        // set the current account to the account with user_id
-                        // that matches id in app_users table
-                        // show the accountId's of all accounts registered under the app_user
+                        accountService.authenticateAccount(app.getCurrentUser().getId());
 
                         if (app.isSessionValid()) {
                             app.getRouter().navigate("/dashboard");
