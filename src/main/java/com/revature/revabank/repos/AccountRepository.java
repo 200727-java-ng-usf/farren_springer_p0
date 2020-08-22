@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.revature.revabank.AppDriver.app;
 
@@ -32,26 +33,67 @@ public class AccountRepository {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
-//    public Optional<Account> findAccountByAccountId(Integer id) {
-//
-//        Optional<Account> _account = Optional.empty();
-//
-//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-//
-//            String sql = baseQuery + "WHERE id = ?";
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.setInt(1, id);
-//
-//            ResultSet rs = pstmt.executeQuery();
-//
-//            _account = mapResultSet(rs).stream().findFirst();
-//
-//        } catch (SQLException sqle) {
-//            sqle.printStackTrace();
-//        }
-//
-//        return _account;
-//    }
+    public Optional<Account> findAccountByAccountId(Integer id) {
+
+        Optional<Account> _account = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE id = ?";
+
+            /**
+             * PreparedStatement to assign to a ResultSet Object
+             */
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            /**
+             * ExecuteQuery
+             */
+            ResultSet rs = pstmt.executeQuery();
+
+            /**
+             * Map the result set to the Optional<Account>
+             */
+            _account = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return _account;
+    }
+
+    public Set<Account> findAllAccountsWithAppUserId(Integer appUserId) {
+
+        Set<Account> accounts = null;
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE user_id = ?";
+
+            /**
+             * PreparedStatement to assign to a ResultSet Object
+             */
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, appUserId);
+
+            /**
+             * ExecuteQuery
+             */
+            ResultSet rs = pstmt.executeQuery();
+
+            /**
+             * Map the result set to the Optional<Account>
+             */
+            accounts = mapResultSet(rs).stream().collect(Collectors.toSet());
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return accounts;
+    }
 
     public static Optional<Account> save(Account account) {
 

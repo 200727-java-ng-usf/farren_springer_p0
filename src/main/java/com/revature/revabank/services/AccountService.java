@@ -27,19 +27,19 @@ public class AccountService {
      * authorized account found using the accountRepo.
      * @param id
      */
-//    public void authenticate(Integer id) {
-//
-//        // validate that the provided username and password are not non-values
-//        if (id == 0 || id.equals("") ) {
-//            throw new InvalidRequestException("Invalid credential values provided!");
-//        }
-//
-//        Account authAccount = accountRepo.findAccountByAccountId(id)
-//                .orElseThrow(AuthenticationException::new);
-//
-//        app.setCurrentAccount(authAccount);
-//
-//    }
+    public void authenticate(Integer id) {
+
+        // validate that the provided username and password are not non-values
+        if (id == 0 || id.equals("") ) {
+            throw new InvalidRequestException("Invalid credential values provided!");
+        }
+
+        Account authAccount = accountRepo.findAccountByAccountId(id)
+                .orElseThrow(AuthenticationException::new);
+
+        app.setCurrentAccount(authAccount);
+
+    }
 
     public void register(Account newAccount) {
 
@@ -82,13 +82,15 @@ public class AccountService {
     }
 
     // TODO method to withdraw funds
-    public void withdrawFunds(Account account) {
-
+    public void withdrawFunds(Account account, Double amount) {
+        account.setBalance(account.getBalance() - amount);
+        System.out.println(account.getBalance());
     }
 
     // TODO method to deposit funds
-    public void depositFunds(Account account) {
-
+    public void depositFunds(Account account, Double amount) {
+        account.setBalance(account.getBalance() + amount);
+        System.out.println(account.getBalance());
     }
 
     // TODO use this method as an option for user
