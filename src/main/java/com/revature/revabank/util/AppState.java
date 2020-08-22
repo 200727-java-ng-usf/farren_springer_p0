@@ -1,5 +1,6 @@
 package com.revature.revabank.util;
 
+import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.repos.AccountRepository;
 import com.revature.revabank.repos.UserRepository;
@@ -16,6 +17,7 @@ public class AppState {
     private AppUser currentUser;
     private ScreenRouter router;
     private boolean appRunning;
+    private Account currentAccount;
 
     public AppState() {
         System.out.println("[LOG] - Initializing application...");
@@ -63,6 +65,10 @@ public class AppState {
     public void setAppRunning(boolean appRunning) {
         this.appRunning = appRunning;
     }
+
+    public Account getCurrentAccount() { return currentAccount; }
+
+    public void setCurrentAccount(Account currentAccount) { this.currentAccount = currentAccount; }
 
     public void invalidateCurrentSession() {
         currentUser = null;

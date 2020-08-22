@@ -42,6 +42,17 @@ public class DepositFundsScreen extends Screen {
         System.out.println("Rendering " + app.getCurrentUser().getFirstName() + "'s Account to deposit funds...");
         System.out.println("Deposit Funds Feature under construction");
 
+
+        try {
+            System.out.println("Amount to Deposit: ");
+            userSelection = app.getConsole().readLine();
+            Double depositAmount = Double.parseDouble(userSelection);
+            // TODO create getcurrentAccount method to call here and adjust balance
+            app.getCurrentAccount().setBalance(app.getCurrentAccount().getBalance() + depositAmount);
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+
 //        while (app.isSessionValid()) {
 //
 //            System.out.println("\n\n+---------------------------------+\n");

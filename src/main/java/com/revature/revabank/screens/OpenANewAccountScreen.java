@@ -68,9 +68,10 @@ public class OpenANewAccountScreen extends Screen {
                 switch (userSelection) {
                     case "1":
                         System.out.println("Creating a Checking Account...");
-                        Account newAccount = new Account(1, 100, 0.00d, app.getCurrentUser(), AccountType.CHECKING);
-                        AccountService.register(newAccount);
-                        System.out.println("Account created with: " + newAccount.getBalance());
+                        Account newCheckingAccount = new Account(1, 100, 0.00d, app.getCurrentUser(), AccountType.CHECKING);
+                        AccountService.register(newCheckingAccount);
+                        app.setCurrentAccount(newCheckingAccount);
+                        System.out.println("Account created with: " + newCheckingAccount.getBalance());
 
                         if (app.isSessionValid()) {
                             app.getRouter().navigate("/dashboard");
@@ -78,9 +79,10 @@ public class OpenANewAccountScreen extends Screen {
                         break;
                     case "2":
                         System.out.println("Creating a Savings Account...");
-                        newAccount = new Account(1, 100, 0.00d, app.getCurrentUser(), AccountType.SAVINGS);
-                        AccountService.register(newAccount);
-                        System.out.println("Account created with: " + newAccount.getBalance());
+                        Account newSavingsAccount = new Account(1, 100, 0.00d, app.getCurrentUser(), AccountType.SAVINGS);
+                        AccountService.register(newSavingsAccount);
+                        app.setCurrentAccount(newSavingsAccount);
+                        System.out.println("Account created with: " + newSavingsAccount.getBalance());
 
                         if (app.isSessionValid()) {
                             app.getRouter().navigate("/dashboard");
