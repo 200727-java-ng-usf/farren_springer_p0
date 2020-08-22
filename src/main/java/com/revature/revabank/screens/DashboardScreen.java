@@ -36,6 +36,8 @@ public class DashboardScreen extends Screen {
                         break;
                     case "2":
                         System.err.println("Add, Withdraw, or See Funds Screen under construction...");
+                        System.err.println("Only feature to add funds for now...navigating to DepositFundsScreen...");
+                        app.getRouter().navigate("/depositFunds");
                         break;
                     case "3":
                         System.err.println("Delete An Account Screen under construction...");

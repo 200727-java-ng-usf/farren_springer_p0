@@ -17,7 +17,9 @@ import static com.revature.revabank.AppDriver.app;
 
 public class OpenANewAccountScreen extends Screen {
 
-    // UserService is a dependency to the LoginScreen
+    /**
+     * AccountService is a dependency to the OpenANewAccountScreen
+      */
     private AccountService accountService;
 
     // Inject the dependency through the constructor (constructor injection)
