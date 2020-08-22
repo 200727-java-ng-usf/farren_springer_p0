@@ -66,7 +66,7 @@ public class OpenANewAccountScreen extends Screen {
                 switch (userSelection) {
                     case "1":
                         System.out.println("Creating a Checking Account...");
-                        Account newAccount = new Account();
+                        Account newAccount = new Account(1, 100, 0.00d, app.getCurrentUser(), AccountType.CHECKING);
                         AccountService.register(newAccount);
                         System.out.println("Account created with: " + newAccount.getBalance());
 

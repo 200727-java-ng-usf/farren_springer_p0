@@ -5,20 +5,28 @@ import java.util.Objects;
 
 public class Account {
 
-    // fields/attributes
+    /**
+     * Account fields
+     */
     private Integer id;
     private Integer accountNumber;
-    private List<AccountType> accountTypeList;
     private Double balance;
     private AppUser appUser;
     private AccountType accountType;
     private String holderName;
 
-    // constructors
+    /**
+     * No-args constructor
+     */
     public Account() {
         super();
     }
 
+    /**
+     * Constructor
+     * @param accountNumber
+     * @param balance
+     */
     public Account(Integer accountNumber, Double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
@@ -26,22 +34,35 @@ public class Account {
         this.accountType = accountType.CHECKING;
     }
 
-    public Account(Integer accountNumber, List<AccountType> accountTypeList, Double balance, AppUser appUser) {
+    /**
+     * Constructor
+     * @param accountNumber
+     * @param balance
+     * @param appUser
+     */
+    public Account(Integer accountNumber, Double balance, AppUser appUser) {
         this(accountNumber, balance);
-        this.accountTypeList = accountTypeList;
         this.appUser = new AppUser();
         this.accountType = accountType.CHECKING;
     }
 
-    public Account(Integer id, Integer accountNumber, List<AccountType> accountTypeList, Double balance, AppUser appUser, AccountType accountType) {
-        this(accountNumber, accountTypeList, balance, appUser);
+    /**
+     * Constructor for all fields
+     * @param id
+     * @param accountNumber
+     * @param balance
+     * @param appUser
+     * @param accountType
+     */
+    public Account(Integer id, Integer accountNumber, Double balance, AppUser appUser, AccountType accountType) {
+        this(accountNumber, balance, appUser);
         this.id = id;
         this.accountType = accountType.CHECKING;
     }
 
     // copy constructor (used for conveniently copying the values of one AppUser to create a new instance with those values)
     public Account(Account copy) {
-        this(copy.id, copy.accountNumber, copy.accountTypeList, copy.balance, copy.appUser, copy.accountType);
+        this(copy.id, copy.accountNumber, copy.balance, copy.appUser, copy.accountType);
     }
 
 
@@ -62,14 +83,6 @@ public class Account {
 
     public void setAccountNumber(Integer accountNumber) {
         this.accountNumber = accountNumber;
-    }
-
-    public List<AccountType> getAccountTypeList() {
-        return accountTypeList;
-    }
-
-    public void setAccountTypeList(List<AccountType> accountTypeList) {
-        this.accountTypeList = accountTypeList;
     }
 
     public Double getBalance() {
@@ -115,16 +128,13 @@ public class Account {
         Account account = (Account) o;
         return Objects.equals(id, account.id) &&
                 Objects.equals(accountNumber, account.accountNumber) &&
-                Objects.equals(accountTypeList, account.accountTypeList) &&
                 Objects.equals(balance, account.balance) &&
-                Objects.equals(appUser, account.appUser) &&
-                accountType == account.accountType &&
-                Objects.equals(holderName, account.holderName);
+                Objects.equals(appUser, account.appUser);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, accountNumber, accountTypeList, balance, appUser, accountType, holderName);
+        return Objects.hash(id, accountNumber, balance, appUser);
     }
 
     @Override
@@ -132,11 +142,8 @@ public class Account {
         return "Account{" +
                 "id=" + id +
                 ", accountNumber=" + accountNumber +
-                ", accountTypeList=" + accountTypeList +
                 ", balance=" + balance +
                 ", appUser=" + appUser +
-                ", accountType=" + accountType +
-                ", holderName='" + holderName + '\'' +
                 '}';
     }
 }
