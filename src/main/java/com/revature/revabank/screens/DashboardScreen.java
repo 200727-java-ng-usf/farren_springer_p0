@@ -32,7 +32,7 @@ public class DashboardScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
-                        System.out.println("See Accounts screen under construction...");
+                        System.err.println("See Accounts screen under construction...");
                         break;
                     case "2":
                         System.err.println("Add, Withdraw, or See Funds Screen under construction...");
@@ -41,7 +41,7 @@ public class DashboardScreen extends Screen {
                         System.err.println("Delete An Account Screen under construction...");
                         break;
                     case "4":
-                        System.err.println("Navigating to New Account Screen...");
+                        System.out.println("Navigating to New Account Screen...");
                         app.getRouter().navigate("/openANewAccount");
                         break;
                     case "5":

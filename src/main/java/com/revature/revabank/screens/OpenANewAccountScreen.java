@@ -77,7 +77,7 @@ public class OpenANewAccountScreen extends Screen {
                     case "2":
                         System.err.println("Creating a Savings Account under construction...");
                         break;
-                    case "6":
+                    case "3":
                         System.out.println(app.getCurrentUser().getUsername() + " going back to Dashboard......");
                         app.getRouter().navigate("/dashboard");
                         break;
