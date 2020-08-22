@@ -1,12 +1,11 @@
 package com.revature.revabank.util;
 
 import com.revature.revabank.models.AppUser;
+import com.revature.revabank.repos.AccountRepository;
 import com.revature.revabank.repos.UserRepository;
-import com.revature.revabank.screens.DashboardScreen;
-import com.revature.revabank.screens.HomeScreen;
-import com.revature.revabank.screens.LoginScreen;
-import com.revature.revabank.screens.RegisterScreen;
+import com.revature.revabank.screens.*;
 import com.revature.revabank.services.UserService;
+import com.revature.revabank.services.AccountService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -25,13 +24,16 @@ public class AppState {
         console = new BufferedReader(new InputStreamReader(System.in));
 
         final UserRepository userRepo = new UserRepository();
+        final AccountRepository accountRepo = new AccountRepository();
         final UserService userService = new UserService(userRepo);
+        final AccountService accountService = new AccountService(accountRepo);
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
                 .addScreen(new RegisterScreen(userService))
                 .addScreen(new LoginScreen(userService))
-                .addScreen(new DashboardScreen());
+                .addScreen(new DashboardScreen())
+                .addScreen(new OpenANewAccountScreen(accountService));
 
         System.out.println("[LOG] - Application initialization complete.");
 

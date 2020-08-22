@@ -41,7 +41,8 @@ public class DashboardScreen extends Screen {
                         System.err.println("Delete An Account Screen under construction...");
                         break;
                     case "4":
-                        System.err.println("Open a New Account Screen under construction...");
+                        System.err.println("Navigating to New Account Screen...");
+                        app.getRouter().navigate("/openANewAccount");
                         break;
                     case "5":
                         System.out.println("Edit User Information Screen under construction...");
@@ -61,8 +62,8 @@ public class DashboardScreen extends Screen {
                 app.setAppRunning(false);
             }
 
-        }
+        } // end while
 
-    }
+    } // end render
 
-}
+} // end class

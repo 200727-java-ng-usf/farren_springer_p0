@@ -1,19 +1,26 @@
 package com.revature.revabank.services;
 
+import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.Account;
+import com.revature.revabank.models.AccountType;
 import com.revature.revabank.models.AppUser;
+import com.revature.revabank.models.Role;
+import com.revature.revabank.repos.AccountRepository;
 import com.revature.revabank.repos.UserRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+
+import static com.revature.revabank.AppDriver.app;
 
 public class AccountService {
 
-    private UserRepository userRepo;
+    private static AccountRepository accountRepo;
 
-    public AccountService(UserRepository repo) {
+    public AccountService(AccountRepository repo) {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
-        userRepo = repo;
+        accountRepo = repo;
     }
 
     /**
@@ -51,5 +58,15 @@ public class AccountService {
         System.out.println(account.getBalance());
     }
 
+    public static void register(Account newAccount) {
+
+
+
+//        newAccount.setAccountType(AccountType.CHECKING);
+        accountRepo.save(newAccount);
+        System.out.println(newAccount);
+//        app.setCurrentUser(newUser);
+
+    }
 
 }

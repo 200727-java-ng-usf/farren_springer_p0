@@ -7,41 +7,47 @@ public class Account {
 
     // fields/attributes
     private Integer id;
-    Integer accountNumber;
-    List<AccountType> accountTypeList;
-    Integer balance;
-    private Role role;
+    private Integer accountNumber;
+    private List<AccountType> accountTypeList;
+    private Double balance;
+    private AppUser appUser;
+    private AccountType accountType;
+    private String holderName;
 
     // constructors
     public Account() {
         super();
     }
 
-    public Account(Integer accountNumber,Integer balance) {
+    public Account(Integer accountNumber, Double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
-        this.role = Role.LOCKED;
+        this.appUser = new AppUser();
+        this.accountType = accountType.CHECKING;
     }
 
-    public Account(Integer accountNumber, List<AccountType> accountTypeList, Integer balance, Role role) {
+    public Account(Integer accountNumber, List<AccountType> accountTypeList, Double balance, AppUser appUser) {
         this(accountNumber, balance);
         this.accountTypeList = accountTypeList;
-        this.role = role;
+        this.appUser = new AppUser();
+        this.accountType = accountType.CHECKING;
     }
 
-    public Account(Integer id, Integer accountNumber, List<AccountType> accountTypeList, Integer balance, Role role) {
-        this(accountNumber, accountTypeList, balance, role);
+    public Account(Integer id, Integer accountNumber, List<AccountType> accountTypeList, Double balance, AppUser appUser, AccountType accountType) {
+        this(accountNumber, accountTypeList, balance, appUser);
         this.id = id;
+        this.accountType = accountType.CHECKING;
     }
 
     // copy constructor (used for conveniently copying the values of one AppUser to create a new instance with those values)
     public Account(Account copy) {
-        this(copy.id, copy.accountNumber, copy.accountTypeList, copy.balance, copy.role);
+        this(copy.id, copy.accountNumber, copy.accountTypeList, copy.balance, copy.appUser, copy.accountType);
     }
 
-    // getters and setters
 
-
+    /**
+     * Getters and Setters
+     */
     public Integer getId() {
         return id;
     }
@@ -66,24 +72,41 @@ public class Account {
         this.accountTypeList = accountTypeList;
     }
 
-    public Integer getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
-    public Role getRole() {
-        return role;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
-    // overridden Object methods
+    public AccountType getAccountType() {
+        return accountType;
+    }
 
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
+    }
+
+    /**
+     * overridden Object methods
+      */
 
     @Override
     public boolean equals(Object o) {
@@ -94,12 +117,14 @@ public class Account {
                 Objects.equals(accountNumber, account.accountNumber) &&
                 Objects.equals(accountTypeList, account.accountTypeList) &&
                 Objects.equals(balance, account.balance) &&
-                role == account.role;
+                Objects.equals(appUser, account.appUser) &&
+                accountType == account.accountType &&
+                Objects.equals(holderName, account.holderName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, accountNumber, accountTypeList, balance, role);
+        return Objects.hash(id, accountNumber, accountTypeList, balance, appUser, accountType, holderName);
     }
 
     @Override
@@ -109,7 +134,9 @@ public class Account {
                 ", accountNumber=" + accountNumber +
                 ", accountTypeList=" + accountTypeList +
                 ", balance=" + balance +
-                ", role=" + role +
+                ", appUser=" + appUser +
+                ", accountType=" + accountType +
+                ", holderName='" + holderName + '\'' +
                 '}';
     }
 }
