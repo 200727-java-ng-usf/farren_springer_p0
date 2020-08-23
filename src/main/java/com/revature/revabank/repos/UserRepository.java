@@ -157,6 +157,28 @@ public class UserRepository {
 
     }
 
+    public static Optional<AppUser> updateEmail(String email, Integer accountId) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE project0.app_users SET email = " + email + " WHERE id = " + accountId;
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            rs.next();
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return null;
+    }
+
     private Set<AppUser> mapResultSet(ResultSet rs) throws SQLException {
 
         Set<AppUser> users = new HashSet<>();

@@ -38,12 +38,13 @@ public class AccessAccountsScreen extends Screen {
 
         while (app.isSessionValid()) {
 
-            System.out.println("\n\n+---------------------------------+\n");
+            System.out.println("\n+---------------------------------+\n");
+            accountService.showActiveAccounts(app.getCurrentUser().getId());
             System.out.println("1) Deposit Funds");
             System.out.println("2) Withdraw Funds");
-            System.out.println("3) View Balances");
-            System.out.println("4) Delete An Account");
-            System.out.println("5) Go Back");
+//            System.out.println("3) View Balances");
+            System.out.println("3) Delete An Account");
+            System.out.println("4) Go Back");
 
             try {
                 System.out.print("Selection: ");
@@ -54,8 +55,6 @@ public class AccessAccountsScreen extends Screen {
 
                         Integer userSelectionInteger = 0;
                         Double depositAmount = 0.0d;
-
-                        accountService.showActiveAccounts(app.getCurrentUser().getId());
 
                         System.out.println("Each account has an id.");
                         System.out.println("Enter the id of the account from which you want to deposit funds: ");
@@ -92,9 +91,6 @@ public class AccessAccountsScreen extends Screen {
                         Integer userSelectionIntegerCase2 = 0;
                         Double withdrawalAmount = 0.0d;
 
-                        System.out.println("Here are your account(s).");
-                        accountService.showActiveAccounts(app.getCurrentUser().getId());
-
                         System.out.println("Each account has an id.");
                         System.out.println("Enter the id of the account from which you want to withdraw funds: ");
                         userSelectionIntegerCase2 = Integer.parseInt(app.getConsole().readLine());
@@ -119,23 +115,19 @@ public class AccessAccountsScreen extends Screen {
                             app.getRouter().navigate("/dashboard");
                         }
                         break;
+//                    case "3":
+//
+//                        accountService.showActiveAccounts(app.getCurrentUser().getId());
+//
+//                        System.out.println("Going back to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
+//
+//                        if (app.isSessionValid()) {
+//                            app.getRouter().navigate("/dashboard");
+//                        }
+//                        break;
                     case "3":
-                        System.out.println("Here are your account(s): ");
-
-                        accountService.showActiveAccounts(app.getCurrentUser().getId());
-
-                        System.out.println("Going back to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
-
-                        if (app.isSessionValid()) {
-                            app.getRouter().navigate("/dashboard");
-                        }
-                        break;
-                    case "4":
                         Integer userSelectionIntegerCase4 = 0;
                         String confirmOrDeny = "N";
-
-                        System.out.println("Here are your account(s).");
-                        accountService.showActiveAccounts(app.getCurrentUser().getId());
 
                         System.out.println("Each account has an id.");
                         System.out.println("Enter the id of the account from which you want to delete: ");
@@ -164,7 +156,7 @@ public class AccessAccountsScreen extends Screen {
                             app.getRouter().navigate("/dashboard");
                         }
 
-                    case "5":
+                    case "4":
                         System.out.println(app.getCurrentUser().getUsername() + " going back to Dashboard......");
                         app.getRouter().navigate("/dashboard");
                         break;

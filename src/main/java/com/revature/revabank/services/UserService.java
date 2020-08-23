@@ -61,6 +61,16 @@ public class UserService {
 
     }
 
+    public void updateEmail(String newEmail, AppUser appUser) {
+
+        if (!isUserValid(appUser)) {
+            throw new InvalidRequestException("User not found...");
+        }
+
+        userRepo.updateEmail(newEmail, appUser.getId());
+
+    }
+
     public Set<AppUser> getAllUsers() {
         return new HashSet<>();
     }

@@ -45,7 +45,7 @@ public class OpenANewAccountScreen extends Screen {
 
         while (app.isSessionValid()) {
 
-            System.out.println("\n\n+---------------------------------+\n");
+            System.out.println("\n+---------------------------------+\n");
             System.out.println("1) Checking Account");
             System.out.println("2) Savings Account");
             System.out.println("3) Go Back");

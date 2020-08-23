@@ -33,7 +33,7 @@ public class DashboardScreen extends Screen {
             System.out.println("\n+---------------------------------+\n");
             System.out.println("1) Access Accounts");
             System.out.println("2) Open a New Account");
-            System.out.println("3) Edit User Information");
+            System.out.println("3) See Profile");
             System.out.println("4) Sign Out");
 
             try {
@@ -51,7 +51,7 @@ public class DashboardScreen extends Screen {
                         app.getRouter().navigate("/openANewAccount");
                         break;
                     case "3":
-                        System.out.println("Edit User Information Screen under construction...");
+                        System.out.println("Navigating to Profile Screen...");
                         app.getRouter().navigate("/profile");
                         break;
                     case "4":

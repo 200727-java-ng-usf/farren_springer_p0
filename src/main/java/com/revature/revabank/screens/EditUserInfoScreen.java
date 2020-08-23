@@ -7,12 +7,12 @@ import java.io.IOException;
 
 import static com.revature.revabank.AppDriver.app;
 
-public class ProfileScreen extends Screen {
+public class EditUserInfoScreen extends Screen {
 
     private UserService userService;
 
-    public ProfileScreen(UserService userService) {
-        super("ProfileScreen", "/profile");
+    public EditUserInfoScreen(UserService userService) {
+        super("EditUserInfoScreen", "/editUserInfo");
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
@@ -25,19 +25,15 @@ public class ProfileScreen extends Screen {
     @Override
     public void render() {
         String userSelection;
-        System.out.println("Rendering " + app.getCurrentUser().getFirstName() + "'s Profile...");
+        System.out.println("Rendering " + app.getCurrentUser().getFirstName() + "'s Edit User Information Screen...");
 
         while (app.isSessionValid()) {
 
             System.out.println("\n+---------------------------------+\n");
-            System.out.println("Here is your user information: ");
-            System.out.println("First Name: " + app.getCurrentUser().getFirstName());
-            System.out.println("Last Name: " + app.getCurrentUser().getLastName());
-            System.out.println("Username: " + app.getCurrentUser().getUsername());
-            System.out.println("Email: " + app.getCurrentUser().getEmail());
-            System.out.println("User ID: " + app.getCurrentUser().getId());
-            System.out.println("1) Edit User Information");
-            System.out.println("2) Go Back");
+            System.out.println("Select information to update:");
+            System.out.println("1) Last Name: " + app.getCurrentUser().getLastName());
+            System.out.println("2) Email: " + app.getCurrentUser().getEmail());
+            System.out.println("3) Go Back");
 
             try {
                 System.out.print("Selection: ");
@@ -45,15 +41,21 @@ public class ProfileScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
-                        // TODO call userRepo methods to edit information
+                        // TODO call userRepo method to update last name
                         app.getRouter().navigate("/editUserInfo");
-                        System.out.println("Cannot edit user information for now...Going back to "
+                        System.out.println("Cannot edit last name for now...Going back to "
                                 + app.getCurrentUser().getFirstName() + "'s Dashboard");
                         app.getRouter().navigate("/dashboard");
                         break;
 
                     case "2":
-                        System.out.println(app.getCurrentUser().getUsername() + " going back to Dashboard......");
+                        // TODO call updateEmail method
+                        System.out.println("Cannot edit email for now...");
+//                        System.out.println("Enter new email: ");
+//                        String newEmail = app.getConsole().readLine();
+//                        userService.updateEmail(newEmail, app.getCurrentUser());
+//                        System.out.println("Email updated to: " + app.getCurrentUser().getEmail());
+                        System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         app.getRouter().navigate("/dashboard");
                         break;
                     default:
@@ -65,4 +67,5 @@ public class ProfileScreen extends Screen {
             }
         } // end while
     }
+
 }
