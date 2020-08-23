@@ -9,12 +9,14 @@ import com.revature.revabank.repos.AccountRepository;
 
 import java.io.IOException;
 import java.util.*;
+import java.text.NumberFormat;
 
 import static com.revature.revabank.AppDriver.app;
 
 public class AccountService {
 
     private static AccountRepository accountRepo;
+    NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(); // for currencies
 
     public AccountService(AccountRepository repo) {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
@@ -75,21 +77,6 @@ public class AccountService {
      * Convenience methods
      * @return
      */
-//    public Set<Account> getAllAccounts() {
-//        return new HashSet<>();
-//    }
-
-//    public Set<Account> getAccountByAccountNumber() {
-//        return new HashSet<>();
-//    }
-//
-//    public boolean deleteAccountById(int id) {
-//        return false;
-//    }
-
-//    public boolean update(Account updatedAccount) {
-//        return false;
-//    }
 
     /**
      * To make sure that the user has accounts, the showActiveAccounts method finds
@@ -130,7 +117,7 @@ public class AccountService {
             amount = Double.valueOf(app.getConsole().readLine());
         }
         account.setBalance(account.getBalance() - amount);
-        System.out.println(account.getBalance());
+        System.out.println("Withdrawing " + defaultFormat.format(amount) + " from account #" + account.getId());
         // instead of saving, we want to edit the information in the db
         accountRepo.updateBalance(account.getBalance(), account.getId());
     }
@@ -150,12 +137,12 @@ public class AccountService {
             amount = Double.valueOf(app.getConsole().readLine());
         }
         account.setBalance(account.getBalance() + amount);
-        System.out.println(account.getBalance());
+        System.out.println("Depositing " + defaultFormat.format(amount) + " into account #" + account.getId());
         accountRepo.updateBalance(account.getBalance(), account.getId());
     }
 
     public void deleteAccount(Account account) {
-        accountRepo.deleteAccount(account.getId());
+        accountRepo.delete(account.getId());
     }
 
     // TODO use this method as an option for user

@@ -30,13 +30,50 @@ public class AccountRepository {
             "ON a.user_id = au.id ";
 
     /**
-     * Breadcrumbs
+     * Constructor
      */
     public AccountRepository() {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
     /**
+     * CREATE operation
+     * @param account
+     * @return
+     */
+    public static Optional<Account> save(Account account) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "INSERT INTO project0.accounts (account_type, balance, user_id) " +
+                    "VALUES (?, ?, ?)";
+
+            // second parameter here is used to indicate column names that will have generated values
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"});
+            pstmt.setString(1, account.getAccountType().toString());
+            pstmt.setDouble(2, account.getBalance());
+            pstmt.setInt(3, app.getCurrentUser().getId());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+
+                ResultSet rs = pstmt.getGeneratedKeys();
+
+                rs.next();
+                account.setId(rs.getInt(1));
+
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * READ operation
      * Find an account by its accountId.
      * Used to authenticate that an account exists in the authenticate
      * method in AccountService.
@@ -49,7 +86,7 @@ public class AccountRepository {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = baseQuery + "WHERE a.id = ?";
+            String sql = baseQuery + "WHERE a.id = ? AND a.user_id = " + app.getCurrentUser().getId();
 
             /**
              * PreparedStatement to assign to a ResultSet Object
@@ -75,8 +112,8 @@ public class AccountRepository {
     }
 
     /**
+     * READ operation
      * FindAccountWithAppUserId returns one Optional object.
-     *
      * This method will be used in the Account Service to find the next instance of an
      * account with a user_id that matches the AppUser's id.
      * @return
@@ -113,6 +150,12 @@ public class AccountRepository {
         return account;
     }
 
+    /**
+     * READ operation
+     * not active
+     * @param userIdFieldOfAccount
+     * @return
+     */
     public Set<Account> findAllAccountsByUserId(Integer userIdFieldOfAccount) {
 
         Set<Account> accounts = null;
@@ -144,42 +187,10 @@ public class AccountRepository {
         return accounts;
     }
 
-
-    public static Optional<Account> save(Account account) {
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = "INSERT INTO project0.accounts (account_type, balance, user_id) " +
-                    "VALUES (?, ?, ?)";
-
-            // second parameter here is used to indicate column names that will have generated values
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"});
-            pstmt.setString(1, account.getAccountType().toString());
-            pstmt.setDouble(2, account.getBalance());
-            pstmt.setInt(3, app.getCurrentUser().getId());
-
-            int rowsInserted = pstmt.executeUpdate();
-
-            if (rowsInserted != 0) {
-
-                ResultSet rs = pstmt.getGeneratedKeys();
-
-                rs.next();
-                account.setId(rs.getInt(1));
-
-            }
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return null;
-    }
-
     /**
+     * UPDATE operation
      * To update the balance column in the accounts table from the project0 schema in the
      * database, updateBalance uses the new balance and the account's id.
-
      * @param balance
      * @param accountId
      * @return
@@ -207,13 +218,17 @@ public class AccountRepository {
         return null;
     }
 
-    public static Optional<Account> deleteAccount(Integer accountId) {
+    /**
+     * DELETE operation
+     * @param id
+     * @return
+     */
+    public static Optional<Account> delete(Integer id) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "DELETE from project0.accounts WHERE id = " + accountId;
+            String sql = "DELETE from project0.accounts WHERE id = " + id;
 
-            // second parameter here is used to indicate column names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
 
@@ -230,6 +245,12 @@ public class AccountRepository {
         return null;
     }
 
+    /**
+     * To make READ operations less redundant
+     * @param rs
+     * @return
+     * @throws SQLException
+     */
     private Set<Account> mapResultSet(ResultSet rs) throws SQLException {
 
         Set<Account> accounts = new HashSet<>();

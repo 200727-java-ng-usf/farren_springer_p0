@@ -30,7 +30,7 @@ public class ProfileScreen extends Screen {
         while (app.isSessionValid()) {
 
             System.out.println("\n+---------------------------------+\n");
-            System.out.println("Here is your user information: ");
+            System.out.println("Here is your user information... ");
             System.out.println("First Name: " + app.getCurrentUser().getFirstName());
             System.out.println("Last Name: " + app.getCurrentUser().getLastName());
             System.out.println("Username: " + app.getCurrentUser().getUsername());

@@ -5,6 +5,7 @@ import com.revature.revabank.services.AccountService;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.text.NumberFormat;
 
 import static com.revature.revabank.AppDriver.app;
 
@@ -14,6 +15,7 @@ public class AccessAccountsScreen extends Screen {
      * AccountService is a dependency to the AccessAccountsScreen
      */
     private AccountService accountService;
+    NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(); // for currencies
 
     // Inject the dependency through the constructor (constructor injection)
     public AccessAccountsScreen(AccountService accountService) {
@@ -57,7 +59,7 @@ public class AccessAccountsScreen extends Screen {
                         Double depositAmount = 0.0d;
 
                         System.out.println("Each account has an id.");
-                        System.out.println("Enter the id of the account from which you want to deposit funds: ");
+                        System.out.println("Enter the id of the account to deposit funds: ");
                         userSelectionInteger = Integer.parseInt(app.getConsole().readLine());
 
                         /**
@@ -92,7 +94,7 @@ public class AccessAccountsScreen extends Screen {
                         Double withdrawalAmount = 0.0d;
 
                         System.out.println("Each account has an id.");
-                        System.out.println("Enter the id of the account from which you want to withdraw funds: ");
+                        System.out.println("Enter the id of the account to withdraw funds: ");
                         userSelectionIntegerCase2 = Integer.parseInt(app.getConsole().readLine());
 
                         accountService.authenticateByAccountId(userSelectionIntegerCase2);

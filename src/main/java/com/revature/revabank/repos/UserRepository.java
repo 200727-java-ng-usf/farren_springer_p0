@@ -1,5 +1,6 @@
 package com.revature.revabank.repos;
 
+import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.models.Role;
 import com.revature.revabank.util.ConnectionFactory;
@@ -22,13 +23,51 @@ public class UserRepository {
             "ON au.role_id = ur.id ";
 
     /**
-     * Breadcrumbs
+     * Constructor
      */
     public UserRepository() {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
     /**
+     * CREATE operation
+     * @param newUser
+     */
+    public void save(AppUser newUser) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "INSERT INTO project0.app_users (username, password, first_name, last_name, email, role_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+
+            // second parameter here is used to indicate column names that will have generated values
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"});
+            pstmt.setString(1, newUser.getUsername());
+            pstmt.setString(2, newUser.getPassword());
+            pstmt.setString(3, newUser.getFirstName());
+            pstmt.setString(4, newUser.getLastName());
+            pstmt.setString(5, newUser.getEmail());
+            pstmt.setInt(6, newUser.getRole().ordinal() + 1);
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+
+                ResultSet rs = pstmt.getGeneratedKeys();
+
+                rs.next();
+                newUser.setId(rs.getInt(1));
+
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+    }
+
+    /**
+     * READ operation
      * This method will return an optional. It tries to get an instance from the ConnectionFactory
      * and to get a connection to the db.
      * @param username
@@ -83,6 +122,11 @@ public class UserRepository {
         return _user;
     }
 
+    /**
+     * READ operation
+     * @param username
+     * @return
+     */
     public Optional<AppUser> findUserByUsername(String username) {
 
         Optional<AppUser> _user = Optional.empty();
@@ -104,6 +148,11 @@ public class UserRepository {
 
     }
 
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
     public Optional<AppUser> findUserById(Integer id) {
 
         Optional<AppUser> _user = Optional.empty();
@@ -124,39 +173,12 @@ public class UserRepository {
         return _user;
     }
 
-    public void save(AppUser newUser) {
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = "INSERT INTO project0.app_users (username, password, first_name, last_name, email, role_id) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
-
-            // second parameter here is used to indicate column names that will have generated values
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"});
-            pstmt.setString(1, newUser.getUsername());
-            pstmt.setString(2, newUser.getPassword());
-            pstmt.setString(3, newUser.getFirstName());
-            pstmt.setString(4, newUser.getLastName());
-            pstmt.setString(5, newUser.getEmail());
-            pstmt.setInt(6, newUser.getRole().ordinal() + 1);
-
-            int rowsInserted = pstmt.executeUpdate();
-
-            if (rowsInserted != 0) {
-
-                ResultSet rs = pstmt.getGeneratedKeys();
-
-                rs.next();
-                newUser.setId(rs.getInt(1));
-
-            }
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-    }
-
+    /**
+     * UPDATE operation
+     * @param email
+     * @param accountId
+     * @return
+     */
     public static Optional<AppUser> updateEmail(String email, Integer accountId) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -179,6 +201,36 @@ public class UserRepository {
         return null;
     }
 
+    /**
+     * DELETE operation
+     */
+    public static Optional<AppUser> delete(Integer id) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "DELETE from project0.app_users WHERE id = " + id;
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            rs.next();
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return null;
+    }
+    /**
+     * To use in READ operations
+     * @param rs
+     * @return
+     * @throws SQLException
+     */
     private Set<AppUser> mapResultSet(ResultSet rs) throws SQLException {
 
         Set<AppUser> users = new HashSet<>();
