@@ -176,7 +176,15 @@ public class AccountRepository {
         return null;
     }
 
-    public static Optional<Account> updateBalance(Account account, Double balance, Integer accountId) {
+    /**
+     * To update the balance column in the accounts table from the project0 schema in the
+     * database, updateBalance uses the new balance and the account's id.
+     * @param account
+     * @param balance
+     * @param accountId
+     * @return
+     */
+    public static Optional<Account> updateBalance(Double balance, Integer accountId) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -184,19 +192,11 @@ public class AccountRepository {
 
             // second parameter here is used to indicate column names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.setString(1, account.getAccountType().toString());
-//            pstmt.setDouble(2, account.getBalance());
-//            pstmt.setInt(3, app.getCurrentUser().getId());
-
-//            int rowsInserted =
                     pstmt.executeUpdate();
-
-//            if (rowsInserted != 0) {
 
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 rs.next();
-//                account.setId(rs.getInt(1));
 
 //            }
 

@@ -120,21 +120,26 @@ public class AccountService {
         /**
          * To check for overdraw, use an if statement
          */
-        while (amount > account.getBalance()) {
-            System.out.println("Cannot overdraw from account! Try again...");
+        while (amount > account.getBalance() || amount < 0.0d) {
+            System.out.println("Invalid amount! Try again...");
             System.out.println("How much would you like to withdraw: ");
             amount = Double.valueOf(app.getConsole().readLine());
         }
         account.setBalance(account.getBalance() - amount);
         System.out.println(account.getBalance());
         // instead of saving, we want to edit the information in the db
-        accountRepo.updateBalance(account, account.getBalance(), account.getId());
+        accountRepo.updateBalance(account.getBalance(), account.getId());
     }
 
-    public void depositFunds(Account account, Double amount) {
+    public void depositFunds(Account account, Double amount) throws IOException {
+        while (amount < 0.0d) {
+            System.out.println("You cannot deposit negative funds! Try again...");
+            System.out.println("How much would you like to withdraw: ");
+            amount = Double.valueOf(app.getConsole().readLine());
+        }
         account.setBalance(account.getBalance() + amount);
         System.out.println(account.getBalance());
-        accountRepo.updateBalance(account, account.getBalance(), account.getId());
+        accountRepo.updateBalance(account.getBalance(), account.getId());
     }
 
     // TODO use this method as an option for user
