@@ -8,16 +8,16 @@ import java.util.Locale;
 
 import static com.revature.revabank.AppDriver.app;
 
-public class EditOrViewAccountsScreen extends Screen {
+public class AccessAccountsScreen extends Screen {
 
     /**
-     * AccountService is a dependency to the EditOrViewAccountsScreen
+     * AccountService is a dependency to the AccessAccountsScreen
      */
     private AccountService accountService;
 
     // Inject the dependency through the constructor (constructor injection)
-    public EditOrViewAccountsScreen(AccountService accountService) {
-        super("EditOrViewAccountsScreen", "/editOrViewAccounts");
+    public AccessAccountsScreen(AccountService accountService) {
+        super("AccessAccountsScreen", "/accessAccounts");
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
@@ -32,7 +32,7 @@ public class EditOrViewAccountsScreen extends Screen {
      */
     @Override
     public void render() {
-        // TODO try to create an account object
+
         String userSelection;
         System.out.println("Rendering " + app.getCurrentUser().getFirstName() + "'s Accounts...");
 
@@ -51,19 +51,26 @@ public class EditOrViewAccountsScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
+
                         Integer userSelectionInteger = 0;
                         Double depositAmount = 0.0d;
 
-                        System.out.println("Here are your account(s).");
-                        accountService.authenticateAccount(app.getCurrentUser().getId());
+                        accountService.showActiveAccounts(app.getCurrentUser().getId());
 
                         System.out.println("Each account has an id.");
                         System.out.println("Enter the id of the account from which you want to deposit funds: ");
                         userSelectionInteger = Integer.parseInt(app.getConsole().readLine());
 
+                        /**
+                         * Find the account
+                         */
                         accountService.authenticateByAccountId(userSelectionInteger);
 
                         System.out.println("How much would you like to deposit: ");
+
+                        /**
+                         * To handle an invalid deposit amount, a try/catch block is used
+                         */
                         try {
                             depositAmount = Double.parseDouble(app.getConsole().readLine());
                         } catch (Exception e) { // TODO custom exception
@@ -86,7 +93,7 @@ public class EditOrViewAccountsScreen extends Screen {
                         Double withdrawalAmount = 0.0d;
 
                         System.out.println("Here are your account(s).");
-                        accountService.authenticateAccount(app.getCurrentUser().getId());
+                        accountService.showActiveAccounts(app.getCurrentUser().getId());
 
                         System.out.println("Each account has an id.");
                         System.out.println("Enter the id of the account from which you want to withdraw funds: ");
@@ -102,7 +109,6 @@ public class EditOrViewAccountsScreen extends Screen {
                             System.out.println("You did not enter an amount.");
                         }
 
-
                         accountService.withdrawFunds(app.getCurrentAccount(), withdrawalAmount);
 
                         System.out.println(app.getCurrentAccount());
@@ -116,7 +122,7 @@ public class EditOrViewAccountsScreen extends Screen {
                     case "3":
                         System.out.println("Here are your account(s): ");
 
-                        accountService.authenticateAccount(app.getCurrentUser().getId());
+                        accountService.showActiveAccounts(app.getCurrentUser().getId());
 
                         System.out.println("Going back to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
 
@@ -129,13 +135,13 @@ public class EditOrViewAccountsScreen extends Screen {
                         String confirmOrDeny = "N";
 
                         System.out.println("Here are your account(s).");
-                        accountService.authenticateAccount(app.getCurrentUser().getId());
+                        accountService.showActiveAccounts(app.getCurrentUser().getId());
 
                         System.out.println("Each account has an id.");
                         System.out.println("Enter the id of the account from which you want to delete: ");
-                        userSelectionIntegerCase2 = Integer.parseInt(app.getConsole().readLine());
+                        userSelectionIntegerCase4 = Integer.parseInt(app.getConsole().readLine());
 
-                        accountService.authenticateByAccountId(userSelectionIntegerCase2);
+                        accountService.authenticateByAccountId(userSelectionIntegerCase4);
 
                         System.out.println(app.getCurrentUser().getFirstName() + ", Are you sure you want to delete this account?");
                         System.out.println("Enter y for yes, n for no: ");
@@ -148,7 +154,7 @@ public class EditOrViewAccountsScreen extends Screen {
 
                         if(confirmOrDeny.equalsIgnoreCase("y")) {
                             accountService.deleteAccount(app.getCurrentAccount());
-                            System.out.println(app.getCurrentAccount() + "Deleted. Navigating to Dashboard");
+                            System.out.println("Account #"+ app.getCurrentAccount().getId() + " Deleted. Navigating to Dashboard");
                         } else if(confirmOrDeny.equalsIgnoreCase("n")) {
                             System.out.println("Account is still open. Navigating to "
                                     + app.getCurrentUser().getFirstName() + "'s Dashboard...");

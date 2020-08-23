@@ -81,7 +81,7 @@ public class AccountServiceTests {
         // nothing to do here for this test; nothing to mock or expect
 
         // Act
-        sut.authenticateAccount(null);
+        sut.showActiveAccounts(null);
 
         // Assert
         // nothing here, because the method should have raised an exception
@@ -89,8 +89,8 @@ public class AccountServiceTests {
     }
 
     @Test(expected = AuthenticationException.class)
-    public void authenticationWithUnknownCredentials() {
-        sut.authenticateAccount(700);
+    public void showAccountsWithUnknownCredentials() {
+        sut.showActiveAccounts(700);
     }
 
     @Test (expected = InvalidRequestException.class)
@@ -147,6 +147,8 @@ public class AccountServiceTests {
 //        // arrange and act
 //        assertEquals(mockAccountRepo.findAccountByAccountId(1), mockUsers.stream().findFirst());
 //    }
+
+    // TODO tests on deleteAccount
 
 
 }

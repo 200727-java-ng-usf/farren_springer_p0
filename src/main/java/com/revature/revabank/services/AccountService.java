@@ -24,8 +24,8 @@ public class AccountService {
     /**
      * To validate that the account exists, the authenticateByAccountId method
      * finds the account if the id is not 0 or empty and finds the account by
-     * the account id. Then, it sets the currentAccount to the account found
-     * using the account id.
+     * the account id.
+     * Then, it sets the currentAccount to the account found using the account id.
      * to the authorized account found using the accountRepo.
      * @param id
      */
@@ -92,17 +92,18 @@ public class AccountService {
 //    }
 
     /**
-     * To make sure that the user has accounts, the authenticateAccount method finds
+     * To make sure that the user has accounts, the showActiveAccounts method finds
      * the accounts associated with the appUser's id using the accountRepository's
      * findAccountByUserId method.
      * @param user_id
      */
-    public void authenticateAccount(Integer user_id) {
+    public void showActiveAccounts(Integer user_id) {
 
         // validate that the provided id is not a non-value
         if (user_id == null ) {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
+        System.out.println("Here are your account(s):");
         Account authAccount = accountRepo.findAccountByUserId(user_id)
                 .orElseThrow(AccountAuthenticationException::new);
 

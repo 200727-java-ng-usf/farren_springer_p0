@@ -31,7 +31,7 @@ public class DashboardScreen extends Screen {
         while (app.isSessionValid()) {
 
             System.out.println("\n+---------------------------------+\n");
-            System.out.println("1) Deposit, Withdrawal, or View");
+            System.out.println("1) Access Accounts");
             System.out.println("2) Open a New Account");
             System.out.println("3) Edit User Information");
             System.out.println("4) Sign Out");
@@ -43,8 +43,8 @@ public class DashboardScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
-                        System.out.println("Navigating to EditOrViewAccountsScreen...");
-                        app.getRouter().navigate("/editOrViewAccounts");
+                        System.out.println("Navigating to AccessAccountsScreen...");
+                        app.getRouter().navigate("/accessAccounts");
                         break;
                     case "2":
                         System.out.println("Navigating to New Account Screen...");
@@ -52,7 +52,7 @@ public class DashboardScreen extends Screen {
                         break;
                     case "3":
                         System.out.println("Edit User Information Screen under construction...");
-//                        app.getRouter().navigate("/profile");
+                        app.getRouter().navigate("/profile");
                         break;
                     case "4":
                         System.out.println(app.getCurrentUser().getUsername() + " signing out...");
