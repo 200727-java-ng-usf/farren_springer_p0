@@ -36,6 +36,7 @@ public class HomeScreen extends Screen {
                     app.getRouter().navigate("/register");
                     break;
                 case "3":
+                    app.invalidateCurrentSession();
                     app.setAppRunning(false);
                     break;
                 default:

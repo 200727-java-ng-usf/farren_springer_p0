@@ -8,16 +8,18 @@ import com.revature.revabank.repos.UserRepository;
 
 import static com.revature.revabank.AppDriver.*;
 
+/**
+ * To take appUsers to screen where they can interact with their accounts, the
+ * dashboard screen render method asks the user what screen they want to go to.
+ */
 public class DashboardScreen extends Screen {
 
-    private static UserRepository userRepo;
-    private static AccountRepository accountRepo;
     /**
      * Constructor
      */
     public DashboardScreen() {
         super("DashboardScreen", "/dashboard");
-        System.out.println("[LOG] - Instantiating " + super.getName());
+        System.out.println("[LOG] - Instantiating " + super.getName()); // breadcrumbs
     }
 
     @Override
@@ -31,9 +33,8 @@ public class DashboardScreen extends Screen {
             System.out.println("\n+---------------------------------+\n");
             System.out.println("1) Deposit, Withdrawal, or View");
             System.out.println("2) Open a New Account");
-            System.out.println("3) Delete an Account");
-            System.out.println("4) Edit User Information");
-            System.out.println("5) Sign Out");
+            System.out.println("3) Edit User Information");
+            System.out.println("4) Sign Out");
 
             try {
 
@@ -42,21 +43,18 @@ public class DashboardScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
-                        System.out.println("Navigating to DepositWithdrawalOrViewScreen...");
-                        app.getRouter().navigate("/depositWithdrawalOrView");
+                        System.out.println("Navigating to EditOrViewAccountsScreen...");
+                        app.getRouter().navigate("/editOrViewAccounts");
                         break;
                     case "2":
                         System.out.println("Navigating to New Account Screen...");
                         app.getRouter().navigate("/openANewAccount");
                         break;
                     case "3":
-                        System.err.println("Delete An Account Screen under construction...");
-                        break;
-                    case "4":
                         System.out.println("Edit User Information Screen under construction...");
 //                        app.getRouter().navigate("/profile");
                         break;
-                    case "5":
+                    case "4":
                         System.out.println(app.getCurrentUser().getUsername() + " signing out...");
                         app.getRouter().navigate("/home");
                         break;

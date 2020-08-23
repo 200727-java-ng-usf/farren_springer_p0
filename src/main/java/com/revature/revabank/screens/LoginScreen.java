@@ -49,6 +49,7 @@ public class LoginScreen extends Screen {
 
         } catch (InvalidRequestException | AuthenticationException e) {
             System.err.println("Invalid login credentials provided!");
+            app.getRouter().navigate("/home");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("[ERROR] - An unexpected exception occurred: " + e.getMessage());

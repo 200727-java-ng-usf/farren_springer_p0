@@ -179,7 +179,7 @@ public class AccountRepository {
     /**
      * To update the balance column in the accounts table from the project0 schema in the
      * database, updateBalance uses the new balance and the account's id.
-     * @param account
+
      * @param balance
      * @param accountId
      * @return
@@ -197,6 +197,29 @@ public class AccountRepository {
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 rs.next();
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static Optional<Account> deleteAccount(Integer accountId) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "DELETE from project0.accounts WHERE id = " + accountId;
+
+            // second parameter here is used to indicate column names that will have generated values
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            rs.next();
 
 //            }
 

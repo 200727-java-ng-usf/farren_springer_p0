@@ -1,13 +1,12 @@
 package com.revature.revabank.services;
 
+import com.revature.revabank.exceptions.AccountAuthenticationException;
 import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.Account;
-import com.revature.revabank.models.AppUser;
-import com.revature.revabank.models.Role;
+
 import com.revature.revabank.repos.AccountRepository;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
@@ -23,13 +22,15 @@ public class AccountService {
     }
 
     /**
-     * Validates that the account exists, finds the account, and sets the currentAccount to the
-     * authorized account found using the accountRepo.
+     * To validate that the account exists, the authenticateByAccountId method
+     * finds the account if the id is not 0 or empty and finds the account by
+     * the account id. Then, it sets the currentAccount to the account found
+     * using the account id.
+     * to the authorized account found using the accountRepo.
      * @param id
      */
     public void authenticateByAccountId(Integer id) {
 
-        // validate that the provided Integer id is not null
         if (id == 0 || id.equals("") ) {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
@@ -42,8 +43,8 @@ public class AccountService {
     }
 
     /**
-     * Creates a new row in the accounts table in the project0 db through the save
-     * method, first checking if the account already exists.
+     * To create a new row in the accounts table, the register method
+     * checks if the account already exists, then saves the account and prints it.
      * @param newAccount
      */
     public void register(Account newAccount) {
@@ -62,13 +63,11 @@ public class AccountService {
 //            throw new RuntimeException("Provided username is already in use!");
 //        }
         /**
-         * Saves the account, prints it, and sets the current account to the
-         * new account (maybe don't need to set it as current since this is
-         * done when they want to make a withdrawal or deposit
+         * To save the account, accountRepo calls the save method.
          */
         accountRepo.save(newAccount);
         System.out.println(newAccount);
-        app.setCurrentAccount(newAccount); // may be redundant
+        app.setCurrentAccount(newAccount); // redundant?
 
     }
 
@@ -76,27 +75,26 @@ public class AccountService {
      * Convenience methods
      * @return
      */
-    public Set<Account> getAllAccounts() {
-        return new HashSet<>();
-    }
+//    public Set<Account> getAllAccounts() {
+//        return new HashSet<>();
+//    }
 
-    public Set<Account> getAccountByAccountNumber() {
-        return new HashSet<>();
-    }
+//    public Set<Account> getAccountByAccountNumber() {
+//        return new HashSet<>();
+//    }
+//
+//    public boolean deleteAccountById(int id) {
+//        return false;
+//    }
 
-    public boolean deleteAccountById(int id) {
-        return false;
-    }
-
-    public boolean update(Account updatedAccount) {
-        return false;
-    }
-
-    // method that returns all accounts with a user_id that matches the currentUser's id
+//    public boolean update(Account updatedAccount) {
+//        return false;
+//    }
 
     /**
-     * This method makes sure that the user has accounts. It will print those accounts
-     * to the console if they exist using the findAccountByUserId method.
+     * To make sure that the user has accounts, the authenticateAccount method finds
+     * the accounts associated with the appUser's id using the accountRepository's
+     * findAccountByUserId method.
      * @param user_id
      */
     public void authenticateAccount(Integer user_id) {
@@ -105,17 +103,22 @@ public class AccountService {
         if (user_id == null ) {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
-
-        /**
-         * The findAccountByUserId prints ALL accounts that the user has made
-         */
         Account authAccount = accountRepo.findAccountByUserId(user_id)
-                .orElseThrow(AuthenticationException::new);
+                .orElseThrow(AccountAuthenticationException::new);
 
-        app.setCurrentAccount(authAccount);
+        app.setCurrentAccount(authAccount); // redundant?
 
     }
 
+    /**
+     * To set the balance field of the currentAccount to the new balance,
+     * the withdrawFunds method validates that the amount is not negative or
+     * more than the current balance.
+     * Then, it calls the updateBalance method to update the database.
+     * @param account
+     * @param amount
+     * @throws IOException
+     */
     public void withdrawFunds(Account account, Double amount) throws IOException {
         /**
          * To check for overdraw, use an if statement
@@ -131,15 +134,27 @@ public class AccountService {
         accountRepo.updateBalance(account.getBalance(), account.getId());
     }
 
+    /**
+     * To set the balance field of the currentAccount to the new balance,
+     * the depositFunds method validates that the amount is not negative.
+     * Then, it calls the updateBalance method to update the database.
+     * @param account
+     * @param amount
+     * @throws IOException
+     */
     public void depositFunds(Account account, Double amount) throws IOException {
         while (amount < 0.0d) {
             System.out.println("You cannot deposit negative funds! Try again...");
-            System.out.println("How much would you like to withdraw: ");
+            System.out.println("How much would you like to deposit: ");
             amount = Double.valueOf(app.getConsole().readLine());
         }
         account.setBalance(account.getBalance() + amount);
         System.out.println(account.getBalance());
         accountRepo.updateBalance(account.getBalance(), account.getId());
+    }
+
+    public void deleteAccount(Account account) {
+        accountRepo.deleteAccount(account.getId());
     }
 
     // TODO use this method as an option for user
