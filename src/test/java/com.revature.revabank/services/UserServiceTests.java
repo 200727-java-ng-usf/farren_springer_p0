@@ -86,9 +86,60 @@ public class UserServiceTests {
         // nothing here, because the method should have raised an exception
     }
 
-    @Test
-    public void registerWithValidAppUser() {
+    @Test (expected = RuntimeException.class)
+    public void registerWithUserAlreadyExists() {
+        // Arrange. Mock findUserByUsername, because we want the test to only test register
+        AppUser expectedUser = new AppUser("Manny", "Gerr", "manager", "manage", "manager@app.com", Role.MANAGER);
+        Mockito.when(mockUserRepo.findUserByUsername("manager"))
+                .thenReturn(Optional.of(expectedUser));
+        // also mock save method
+        Mockito.when(mockUserRepo.save(expectedUser))
+                .thenReturn(Optional.of(expectedUser));
 
+        // Act
+        sut.register(expectedUser);
+        AppUser actualResult = app.getCurrentUser();
+
+        // Assert
+        Assert.assertEquals(expectedUser, actualResult);
     }
+
+    //    @Test
+//    public void registerWithValidAppUser() {
+//        // Arrange. Mock findUserByUsername, because we want the test to only test register
+//        AppUser expectedUser = new AppUser("Manny", "Gerr", "manager", "manage", "manager@app.com", Role.MANAGER);
+//        Mockito.when(mockUserRepo.findUserByUsername("manager"))
+//                .thenReturn(Optional.of(expectedUser));
+//        // also mock save method
+//        Mockito.when(mockUserRepo.save(expectedUser))
+//                .thenReturn(Optional.of(expectedUser));
+//
+//        // Act
+//        sut.register(expectedUser);
+//        AppUser actualResult = app.getCurrentUser();
+//
+//        // Assert
+//        Assert.assertEquals(expectedUser, actualResult);
+//    }
+
+    @Test (expected = InvalidRequestException.class)
+    public void updateEmailWithInvalidUser() {
+        sut.updateEmail("", null);
+    }
+
+//    @Test
+//    public void updateEmailWithValidUser() {
+//        // Arrange
+//        String expectedEmail = "newEmail@email.com";
+//        AppUser actualResult = new AppUser("Alice", "Anderson", "aanderson", "password", "admin@app.com", Role.BASIC_MEMBER);
+//        Mockito.when(mockUserRepo.updateEmail("newEmail@email.com", 3))
+//                .thenReturn(Optional.of(actualResult));
+//
+//        // Act
+//        sut.updateEmail("newEmail@email.com", actualResult);
+//
+//        // Assert
+//        Assert.assertEquals(expectedEmail, actualResult.getEmail());
+//    }
 
 }

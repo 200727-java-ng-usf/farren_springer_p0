@@ -152,12 +152,15 @@ public class AccessAccountsScreen extends Screen {
                         } else if(confirmOrDeny.equalsIgnoreCase("n")) {
                             System.out.println("Account is still open. Navigating to "
                                     + app.getCurrentUser().getFirstName() + "'s Dashboard...");
+                        } else {
+                            System.out.println("I'll take that as a no. Returning to "
+                                    + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         }
 
                         if (app.isSessionValid()) {
                             app.getRouter().navigate("/dashboard");
                         }
-
+                        break;
                     case "4":
                         System.out.println(app.getCurrentUser().getUsername() + " going back to Dashboard......");
                         app.getRouter().navigate("/dashboard");

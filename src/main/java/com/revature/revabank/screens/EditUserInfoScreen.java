@@ -58,6 +58,9 @@ public class EditUserInfoScreen extends Screen {
                         System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         app.getRouter().navigate("/dashboard");
                         break;
+                    case "3":
+                        System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
+                        app.getRouter().navigate("/dashboard");
                     default:
                         System.out.println("Invalid Selection!");
 

@@ -74,6 +74,14 @@ public class UserService {
 
     }
 
+    /**
+     * DELETE operation
+     * @param account
+     */
+    public void deleteUser(AppUser appUser) {
+        userRepo.deleteById(appUser.getId());
+    }
+
     public Set<AppUser> getAllUsers() {
         return new HashSet<>();
     }

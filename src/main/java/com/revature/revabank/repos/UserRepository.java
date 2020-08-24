@@ -217,21 +217,22 @@ public class UserRepository implements CrudRepository<AppUser>{
     /**
      * UPDATE operation
      * @param email
-     * @param accountId
+     * @param id
      * @return
      */
-    public static Optional<AppUser> updateEmail(String email, Integer accountId) {
+    public static Optional<AppUser> updateEmail(String email, Integer id) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE project0.app_users SET email = " + email + " WHERE id = " + accountId;
+            String sql = "UPDATE project0.app_users SET email = " + email + " WHERE id = " + id;
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
+            pstmt.close();
 
-            ResultSet rs = pstmt.getGeneratedKeys();
-
-            rs.next();
+//            ResultSet rs = pstmt.getGeneratedKeys();
+//
+//            rs.next();
 
 //            }
 
