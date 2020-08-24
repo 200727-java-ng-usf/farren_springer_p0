@@ -25,10 +25,9 @@ public class AccountService {
 
     /**
      * To validate that the account exists, the authenticateByAccountId method
-     * finds the account if the id is not 0 or empty and finds the account by
-     * the account id.
-     * Then, it sets the currentAccount to the account found using the account id.
-     * to the authorized account found using the accountRepo.
+     * finds the account if the id is not 0 or empty and finds the account using
+     * findById in the AccountRepository.
+     * Then, it sets the currentAccount to the account found.
      * @param id
      */
     public void authenticateByAccountId(Integer id) {
@@ -37,7 +36,7 @@ public class AccountService {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
 
-        Account authAccount = accountRepo.findAccountByAccountId(id)
+        Account authAccount = accountRepo.findById(id)
                 .orElseThrow(AuthenticationException::new);
 
         app.setCurrentAccount(authAccount);
@@ -100,6 +99,25 @@ public class AccountService {
 
     /**
      * To set the balance field of the currentAccount to the new balance,
+     * the depositFunds method validates that the amount is not negative.
+     * Then, it calls the updateBalance method to update the database.
+     * @param account
+     * @param amount
+     * @throws IOException
+     */
+    public void depositFunds(Account account, Double amount) throws IOException {
+        while (amount < 0.0d) {
+            System.out.println("You cannot deposit negative funds! Try again...");
+            System.out.println("How much would you like to deposit: ");
+            amount = Double.valueOf(app.getConsole().readLine());
+        }
+        account.setBalance(account.getBalance() + amount);
+        System.out.println("Depositing " + defaultFormat.format(amount) + " into account #" + account.getId());
+        accountRepo.updateBalance(account.getBalance(), account.getId());
+    }
+
+    /**
+     * To set the balance field of the currentAccount to the new balance,
      * the withdrawFunds method validates that the amount is not negative or
      * more than the current balance.
      * Then, it calls the updateBalance method to update the database.
@@ -122,27 +140,8 @@ public class AccountService {
         accountRepo.updateBalance(account.getBalance(), account.getId());
     }
 
-    /**
-     * To set the balance field of the currentAccount to the new balance,
-     * the depositFunds method validates that the amount is not negative.
-     * Then, it calls the updateBalance method to update the database.
-     * @param account
-     * @param amount
-     * @throws IOException
-     */
-    public void depositFunds(Account account, Double amount) throws IOException {
-        while (amount < 0.0d) {
-            System.out.println("You cannot deposit negative funds! Try again...");
-            System.out.println("How much would you like to deposit: ");
-            amount = Double.valueOf(app.getConsole().readLine());
-        }
-        account.setBalance(account.getBalance() + amount);
-        System.out.println("Depositing " + defaultFormat.format(amount) + " into account #" + account.getId());
-        accountRepo.updateBalance(account.getBalance(), account.getId());
-    }
-
     public void deleteAccount(Account account) {
-        accountRepo.delete(account.getId());
+        accountRepo.deleteById(account.getId());
     }
 
     // TODO use this method as an option for user

@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class UserRepository {
+public class UserRepository implements CrudRepository<AppUser>{
 
     /**
      * Extract common query clauses into a easily referenced member for reusability.
@@ -33,7 +33,7 @@ public class UserRepository {
      * CREATE operation
      * @param newUser
      */
-    public void save(AppUser newUser) {
+    public Optional<AppUser> save(AppUser newUser) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -64,6 +64,70 @@ public class UserRepository {
             sqle.printStackTrace();
         }
 
+        return null;
+
+    }
+
+    /**
+     * READ operation
+     * @return
+     */
+    public Set<Optional<AppUser>> findAll() {
+
+        Optional<AppUser> _user = Optional.empty();
+        Set<Optional<AppUser>> _users = new HashSet<>();
+
+        /**
+         * Try with resources; the resource is the JDB
+         */
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery;
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            /**
+             * ExecuteQuery
+             */
+            ResultSet rs = pstmt.executeQuery();
+
+            /**
+             * Map the result set of the query to the _user Optional
+             * to be returned to the findUserByCredentials method.
+             */
+            _user = mapResultSet(rs).stream().findAny();
+            _users.add(_user);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return _users;
+    }
+
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
+    public Optional<AppUser> findById(Integer id) {
+
+        Optional<AppUser> _user = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            _user = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return _user;
     }
 
     /**
@@ -148,30 +212,7 @@ public class UserRepository {
 
     }
 
-    /**
-     * READ operation
-     * @param id
-     * @return
-     */
-    public Optional<AppUser> findUserById(Integer id) {
 
-        Optional<AppUser> _user = Optional.empty();
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = baseQuery + "WHERE id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-
-            ResultSet rs = pstmt.executeQuery();
-            _user = mapResultSet(rs).stream().findFirst();
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return _user;
-    }
 
     /**
      * UPDATE operation
@@ -204,7 +245,7 @@ public class UserRepository {
     /**
      * DELETE operation
      */
-    public static Optional<AppUser> delete(Integer id) {
+    public boolean deleteById(Integer id) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -216,6 +257,7 @@ public class UserRepository {
             ResultSet rs = pstmt.getGeneratedKeys();
 
             rs.next();
+            return true;
 
 //            }
 
@@ -223,7 +265,7 @@ public class UserRepository {
             sqle.printStackTrace();
         }
 
-        return null;
+        return false;
     }
     /**
      * To use in READ operations

@@ -1,5 +1,6 @@
 package com.revature.revabank.services;
 
+import com.revature.revabank.exceptions.AccountAuthenticationException;
 import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.Account;
@@ -21,13 +22,14 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.revature.revabank.AppDriver.app;
 import static org.junit.Assert.*;
 
 public class AccountServiceTests {
 
     private AccountService sut;
     private AccountRepository mockAccountRepo = Mockito.mock(AccountRepository.class);
-    Set<Account> mockUsers = new HashSet<>();
+    Set<Account> mockAccounts = new HashSet<>();
 
     /**
      * Sets up a new output stream to test printLn method
@@ -41,10 +43,10 @@ public class AccountServiceTests {
     @Before
     public void setup() {
         sut = new AccountService(mockAccountRepo);
-        mockUsers.add(new Account(1, AccountType.CHECKING, 4,300.00d));
-        mockUsers.add(new Account(2, AccountType.CHECKING, 3,300.00d));
-        mockUsers.add(new Account(3, AccountType.SAVINGS, 2,300.00d));
-        mockUsers.add(new Account(4, AccountType.SAVINGS, 1,300.00d));
+        mockAccounts.add(new Account(1, AccountType.CHECKING, 4,300.00d));
+        mockAccounts.add(new Account(2, AccountType.CHECKING, 3,300.00d));
+        mockAccounts.add(new Account(3, AccountType.SAVINGS, 2,300.00d));
+        mockAccounts.add(new Account(4, AccountType.SAVINGS, 1,300.00d));
         System.setOut(new PrintStream(outContent));
     }
 
@@ -54,25 +56,26 @@ public class AccountServiceTests {
     @After
     public void tearDown() {
         sut = null;
-        mockUsers.removeAll(mockUsers);
+        mockAccounts.removeAll(mockAccounts);
         System.setOut(originalOut);
     }
 
-//    @Test
-//    public void authenticationWithValidCredentials() {
-//
-//        // Arrange
-//        Account expectedAccount = new Account(1, AccountType.CHECKING, 30, 20.00d);
-//        Mockito.when(mockAccountRepo.findAccountByUserId(1))
-//                .thenReturn(Optional.of(expectedAccount));
-//
-//        // Act
-//        Account actualResult = sut.authenticateByAccountId(1);
-//
-//        // Assert
-//        Assert.assertEquals(expectedUser, actualResult);
-//
-//    }
+    @Test
+    public void authenticationWithValidCredentials() {
+
+        // Arrange. Mock findAccountByCredentials, because we want the test to only test authenticate
+        Account expectedAccount = new Account(5, AccountType.CHECKING, 4,300.00d);
+        Mockito.when(mockAccountRepo.findById(5))
+                .thenReturn(Optional.of(expectedAccount));
+
+        // Act
+        sut.authenticateByAccountId(5);
+        Account actualResult = app.getCurrentAccount();
+
+        // Assert
+        Assert.assertEquals(expectedAccount, actualResult);
+
+    }
 
     @Test(expected = InvalidRequestException.class)
     public void authenticationWithInvalidCredentials() {
@@ -88,23 +91,12 @@ public class AccountServiceTests {
 
     }
 
-    @Test(expected = AuthenticationException.class)
-    public void showAccountsWithUnknownCredentials() {
-        sut.showActiveAccounts(700);
-    }
-
     @Test (expected = InvalidRequestException.class)
     public void registerWithNullObject() { sut.register(null); }
 
-    @Test (expected = NullPointerException.class)
-    public void withdrawFromNonExistentAccount() throws IOException {
-        // arrange
-        Account mockAccount = new Account(null,null);
-
-        // act
-        sut.withdrawFunds(mockAccount, 200.00);
-
-        // nothing to assert; method should raise an exception
+    @Test(expected = AccountAuthenticationException.class)
+    public void showAccountsWithUnknownCredentials() {
+        sut.showActiveAccounts(700);
     }
 
     @Test (expected = NullPointerException.class)
@@ -118,6 +110,23 @@ public class AccountServiceTests {
         // nothing to assert; method should raise an exception
     }
 
+    @Test (expected = NullPointerException.class)
+    public void withdrawFromNonExistentAccount() throws IOException {
+        // arrange
+        Account mockAccount = new Account(null,null);
+
+        // act
+        sut.withdrawFunds(mockAccount, 200.00);
+
+        // nothing to assert; method should raise an exception
+    }
+
+//    @Test (expected = AccountAuthenticationException.class)
+//    public void deleteAccountForUserWithNoAccount() {
+//        // Arrange
+//
+//    }
+
     @Test
     public void inValidAccountReturnsFalse() {
         // arrange
@@ -130,7 +139,7 @@ public class AccountServiceTests {
     @Test
     public void validAccountReturnsTrue() throws Exception {
         // arrange, act, assert
-        assertEquals(true, sut.isAccountValid(mockUsers.stream().findAny().orElseThrow(Exception::new)));
+        assertEquals(true, sut.isAccountValid(mockAccounts.stream().findAny().orElseThrow(Exception::new)));
     }
 
     @Test

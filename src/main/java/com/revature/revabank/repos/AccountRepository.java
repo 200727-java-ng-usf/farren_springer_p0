@@ -4,7 +4,6 @@ import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AccountType;
 import com.revature.revabank.util.ConnectionFactory;
 
-import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +18,7 @@ import static com.revature.revabank.AppDriver.app;
 /**
  * AccountRepository contains methods that access the db through SQL query result sets.
  */
-public class AccountRepository {
+public class AccountRepository implements CrudRepository<Account>{
 
     /**
      * Extract common query clauses into a easily referenced member for reusability.
@@ -41,7 +40,7 @@ public class AccountRepository {
      * @param account
      * @return
      */
-    public static Optional<Account> save(Account account) {
+    public Optional<Account> save(Account account) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -74,13 +73,50 @@ public class AccountRepository {
 
     /**
      * READ operation
+     * @return
+     */
+    public Set<Optional<Account>> findAll() {
+
+        Optional<Account> _account = Optional.empty();
+        Set<Optional<Account>> _accounts = new HashSet<>();
+
+        /**
+         * Try with resources; the resource is the JDB
+         */
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery;
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            /**
+             * ExecuteQuery
+             */
+            ResultSet rs = pstmt.executeQuery();
+
+            /**
+             * Map the result set of the query to the _user Optional
+             * to be returned to the findUserByCredentials method.
+             */
+            _account = mapResultSet(rs).stream().findAny();
+            _accounts.add(_account);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return _accounts;
+    }
+
+    /**
+     * READ operation
      * Find an account by its accountId.
      * Used to authenticate that an account exists in the authenticate
      * method in AccountService.
-     * @param accountId
+     * @param id
      * @return
      */
-    public Optional<Account> findAccountByAccountId(Integer accountId) {
+    public Optional<Account> findById(Integer id) {
 
         Optional<Account> _account = Optional.empty();
 
@@ -92,7 +128,7 @@ public class AccountRepository {
              * PreparedStatement to assign to a ResultSet Object
              */
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, accountId);
+            pstmt.setInt(1, id);
 
             /**
              * ExecuteQuery
@@ -223,7 +259,7 @@ public class AccountRepository {
      * @param id
      * @return
      */
-    public static Optional<Account> delete(Integer id) {
+    public boolean deleteById(Integer id) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -235,6 +271,7 @@ public class AccountRepository {
             ResultSet rs = pstmt.getGeneratedKeys();
 
             rs.next();
+            return true;
 
 //            }
 
@@ -242,7 +279,7 @@ public class AccountRepository {
             sqle.printStackTrace();
         }
 
-        return null;
+        return false;
     }
 
     /**

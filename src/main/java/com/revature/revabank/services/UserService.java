@@ -35,6 +35,9 @@ public class UserService {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
 
+        /**
+         * Uses a READ operation from UserRepository class
+         */
         AppUser authUser = userRepo.findUserByCredentials(username, password)
                 .orElseThrow(AuthenticationException::new);
 
