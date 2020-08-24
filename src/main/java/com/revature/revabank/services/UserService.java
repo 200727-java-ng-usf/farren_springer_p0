@@ -76,35 +76,35 @@ public class UserService {
 
     /**
      * DELETE operation
-     * @param account
+     * @param appUser
      */
     public void deleteUser(AppUser appUser) {
         userRepo.deleteById(appUser.getId());
     }
 
-    public Set<AppUser> getAllUsers() {
-        return new HashSet<>();
-    }
-
-    public Set<AppUser> getUsersByRole() {
-        return new HashSet<>();
-    }
-
-    public AppUser getUserById(int id) {
-        return null;
-    }
-
-    public AppUser getUserByUsername(String username) {
-        return null;
-    }
-
-    public boolean deleteUserById(int id) {
-        return false;
-    }
-
-    public boolean update(AppUser updatedUser) {
-        return false;
-    }
+//    public Set<AppUser> getAllUsers() {
+//        return new HashSet<>();
+//    }
+//
+//    public Set<AppUser> getUsersByRole() {
+//        return new HashSet<>();
+//    }
+//
+//    public AppUser getUserById(int id) {
+//        return null;
+//    }
+//
+//    public AppUser getUserByUsername(String username) {
+//        return null;
+//    }
+//
+//    public boolean deleteUserById(int id) {
+//        return false;
+//    }
+//
+//    public boolean update(AppUser updatedUser) {
+//        return false;
+//    }
 
     /**
      * Validates that the given user and its fields are valid (not null or empty strings). Does

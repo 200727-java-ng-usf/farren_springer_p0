@@ -110,6 +110,22 @@ public class AccountServiceTests {
         // nothing to assert; method should raise an exception
     }
 
+//    @Test
+//    public void depositToValidAccount() throws IOException{
+//        // Arrange. Mock repo updatebalance, because we want the test to only test service updateBalance
+//        Double expectedBalance = 200.00d;
+//        Account expectedAccount = new Account(6, AccountType.CHECKING, 6,300.00d);
+//        Mockito.when(mockAccountRepo.updateBalance(expectedAccount.getBalance(), expectedAccount.getId()))
+//                .thenReturn(Optional.of(expectedAccount));
+//
+//        // Act
+//        sut.depositFunds(expectedAccount, 200.00d);
+//        Double actualResult = app.getCurrentAccount().getBalance();
+//
+//        // Assert
+//        Assert.assertEquals(expectedBalance, actualResult);
+//    }
+
     @Test (expected = NullPointerException.class)
     public void withdrawFromNonExistentAccount() throws IOException {
         // arrange
