@@ -29,23 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3818051-fa09-4f66-8a11-57c33ff4fff3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/models/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/models/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/models/AppUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/AccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/CrudRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/CrudRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/AccessAccountsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/AccessAccountsScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/DashboardScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/DashboardScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/EditUserInfoScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/EditUserInfoScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/HomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/HomeScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/LoginScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/OpenANewAccountScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/OpenANewAccountScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/ProfileScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/ProfileScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/RegisterScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/RegisterScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/util/ConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/util/ConnectionFactory.java" afterDir="false" />
-    </list>
+    <list default="true" id="c3818051-fa09-4f66-8a11-57c33ff4fff3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -219,25 +203,25 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1230" y="58" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598118320489" />
-    <state width="1877" height="262" key="GridCell.Tab.0.bottom" timestamp="1598367454959">
+    <state width="1877" height="262" key="GridCell.Tab.0.bottom" timestamp="1598368480083">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="262" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598367454959" />
+    <state width="1877" height="262" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598368480083" />
     <state width="914" height="260" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1598293060995" />
-    <state width="1877" height="262" key="GridCell.Tab.0.center" timestamp="1598367454959">
+    <state width="1877" height="262" key="GridCell.Tab.0.center" timestamp="1598368480082">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="262" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598367454959" />
+    <state width="1877" height="262" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598368480082" />
     <state width="914" height="260" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1598293060995" />
-    <state width="1877" height="262" key="GridCell.Tab.0.left" timestamp="1598367454959">
+    <state width="1877" height="262" key="GridCell.Tab.0.left" timestamp="1598368480082">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="262" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598367454959" />
+    <state width="1877" height="262" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598368480082" />
     <state width="914" height="260" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1598293060995" />
-    <state width="1877" height="262" key="GridCell.Tab.0.right" timestamp="1598367454959">
+    <state width="1877" height="262" key="GridCell.Tab.0.right" timestamp="1598368480083">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="262" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598367454959" />
+    <state width="1877" height="262" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598368480083" />
     <state width="914" height="260" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1598293060995" />
     <state x="-967" y="-209" width="974" height="1047" key="dock-window-1" timestamp="1598105603189">
       <screen x="-1920" y="-209" width="1920" height="1040" />
