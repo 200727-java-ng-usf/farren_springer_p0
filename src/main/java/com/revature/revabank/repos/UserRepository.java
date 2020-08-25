@@ -246,6 +246,23 @@ public class UserRepository implements CrudRepository<AppUser>{
         return null;
     }
 
+    public static Optional<AppUser> updateLastName(String lastName, Integer id) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE project0.app_users SET last_name = '" + lastName + "' WHERE id = " + id;
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+            pstmt.close();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return null;
+    }
+
     /**
      * DELETE operation
      */

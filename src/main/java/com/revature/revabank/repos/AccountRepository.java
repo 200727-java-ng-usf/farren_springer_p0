@@ -24,8 +24,8 @@ public class AccountRepository implements CrudRepository<Account>{
      * Extract common query clauses into a easily referenced member for reusability.
      * This base query selects all from the accounts table in schema project0
      */
-    private String baseQuery = "SELECT * FROM project0.accounts a " +
-            "JOIN project0.app_users au " +
+    private String baseQuery = "SELECT * FROM project0.accounts a "
+            + "JOIN project0.app_users au " +
             "ON a.user_id = au.id ";
 
     /**

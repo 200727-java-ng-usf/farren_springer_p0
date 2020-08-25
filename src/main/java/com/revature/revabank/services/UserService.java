@@ -74,6 +74,17 @@ public class UserService {
 
     }
 
+    public void updateLastName(String newLastName, AppUser appUser) {
+
+        if (!isUserValid(appUser)) {
+            throw new InvalidRequestException("User not found...");
+        }
+
+        appUser.setLastName(newLastName);
+        userRepo.updateLastName(newLastName, appUser.getId());
+
+    }
+
     /**
      * DELETE operation
      * @param appUser

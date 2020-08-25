@@ -1,14 +1,10 @@
 package com.revature.revabank.services;
 
 import com.revature.revabank.exceptions.AccountAuthenticationException;
-import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AccountType;
-import com.revature.revabank.models.AppUser;
-import com.revature.revabank.models.Role;
 import com.revature.revabank.repos.AccountRepository;
-import com.revature.revabank.repos.UserRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -136,16 +132,6 @@ public class AccountServiceTests {
 
         // nothing to assert; method should raise an exception
     }
-
-//    @Test (expected = AccountAuthenticationException.class)
-//    public void deleteAccountForUserWithNoAccount() {
-//        // Arrange
-//        AppUser mockUser = new AppUser(9,"Spongebob", "Squarepants", "ssquare", "pants", "pants@gmail.com", Role.BASIC_MEMBER);
-//
-//        // Act
-//        sut.deleteAccount(app.getCurrentAccount());
-//
-//    }
 
     @Test
     public void inValidAccountReturnsFalse() {

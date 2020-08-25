@@ -42,9 +42,11 @@ public class EditUserInfoScreen extends Screen {
                 switch (userSelection) {
                     case "1":
                         // TODO call userRepo method to update last name
-                        app.getRouter().navigate("/editUserInfo");
-                        System.out.println("Cannot edit last name for now...Going back to "
-                                + app.getCurrentUser().getFirstName() + "'s Dashboard");
+                        System.out.println("Enter new last name: ");
+                        String newLastName = app.getConsole().readLine();
+                        userService.updateLastName(newLastName, app.getCurrentUser());
+                        System.out.println("Last name updated to: " + app.getCurrentUser().getLastName());
+                        System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         app.getRouter().navigate("/dashboard");
                         break;
 
