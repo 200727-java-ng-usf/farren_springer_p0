@@ -2,11 +2,7 @@ package com.revature.revabank.screens;
 
 import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
-import com.revature.revabank.models.AppUser;
 import com.revature.revabank.services.UserService;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 import static com.revature.revabank.AppDriver.app;
 

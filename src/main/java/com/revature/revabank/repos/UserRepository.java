@@ -1,6 +1,5 @@
 package com.revature.revabank.repos;
 
-import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.models.Role;
 import com.revature.revabank.util.ConnectionFactory;
@@ -13,6 +12,11 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * UserRepository contains methods that access the db through SQL query result sets.
+ * The query sets create, read, update, or delete information from the app_users table
+ * in project0.sql.
+ */
 public class UserRepository implements CrudRepository<AppUser>{
 
     /**

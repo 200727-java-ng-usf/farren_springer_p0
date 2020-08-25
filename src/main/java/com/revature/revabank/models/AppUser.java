@@ -4,6 +4,9 @@ import com.revature.revabank.models.Role;
 
 import java.util.Objects;
 
+/**
+ * POJO. Fields correspond to app_users table in project0.sql
+ */
 public class AppUser {
 
     /**

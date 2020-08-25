@@ -2,7 +2,6 @@ package com.revature.revabank.services;
 
 import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
-import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.models.Role;
 import com.revature.revabank.repos.UserRepository;

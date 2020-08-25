@@ -17,6 +17,8 @@ import static com.revature.revabank.AppDriver.app;
 
 /**
  * AccountRepository contains methods that access the db through SQL query result sets.
+ * The query sets create, read, update, or delete information from the accounts table
+ * in project0.sql.
  */
 public class AccountRepository implements CrudRepository<Account>{
 
@@ -283,7 +285,7 @@ public class AccountRepository implements CrudRepository<Account>{
     }
 
     /**
-     * To make READ operations less redundant
+     * Convenience method to make READ operations less redundant
      * @param rs
      * @return
      * @throws SQLException

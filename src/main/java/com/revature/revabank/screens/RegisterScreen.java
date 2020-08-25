@@ -4,9 +4,6 @@ import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.services.UserService;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import static com.revature.revabank.AppDriver.app;
 
 public class RegisterScreen extends Screen {
@@ -17,7 +14,6 @@ public class RegisterScreen extends Screen {
         super("RegisterScreen", "/register");
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
         this.userService = userService;
-//        userService = new UserService(); // tight coupling! we aim for loose coupling
     }
 
     @Override
@@ -53,7 +49,5 @@ public class RegisterScreen extends Screen {
             System.out.println("[LOG] - Shutting down application");
             app.setAppRunning(false);
         }
-
-    }
-
-}
+    } // end render
+} // end class

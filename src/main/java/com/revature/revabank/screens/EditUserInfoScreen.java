@@ -1,6 +1,5 @@
 package com.revature.revabank.screens;
 
-import com.revature.revabank.services.AccountService;
 import com.revature.revabank.services.UserService;
 
 import java.io.IOException;
@@ -17,8 +16,6 @@ public class EditUserInfoScreen extends Screen {
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
         this.userService = userService;
-
-//        userService = new UserService();
 
     }
 
@@ -40,7 +37,7 @@ public class EditUserInfoScreen extends Screen {
                 userSelection = app.getConsole().readLine();
 
                 switch (userSelection) {
-                    case "1":
+                    case "1": // change last name
                         // TODO call userRepo method to update last name
                         System.out.println("Enter new last name: ");
                         String newLastName = app.getConsole().readLine();
@@ -50,7 +47,7 @@ public class EditUserInfoScreen extends Screen {
                         app.getRouter().navigate("/dashboard");
                         break;
 
-                    case "2":
+                    case "2": // change email
                         // TODO call updateEmail method
 //                        System.out.println("Cannot edit email for now...");
                         System.out.println("Enter new email: ");
@@ -60,7 +57,7 @@ public class EditUserInfoScreen extends Screen {
                         System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         app.getRouter().navigate("/dashboard");
                         break;
-                    case "3":
+                    case "3": // go back
                         System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         app.getRouter().navigate("/dashboard");
                     default:

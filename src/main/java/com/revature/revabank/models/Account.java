@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 import java.util.Objects;
 
 /**
- * POJO
+ * POJO. Fields correspond to accounts table in project0.sql
  */
 public class Account {
 

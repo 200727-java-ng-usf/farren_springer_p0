@@ -1,13 +1,11 @@
 package com.revature.revabank.screens;
 
-import com.revature.revabank.repos.UserRepository;
-import com.revature.revabank.services.UserService;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import static com.revature.revabank.AppDriver.app;
 
+/**
+ * The HomeScreen render method is to be called in the main
+ * method of AppDriver.
+ */
 public class HomeScreen extends Screen {
 
     public HomeScreen() {
@@ -29,7 +27,6 @@ public class HomeScreen extends Screen {
 
             switch (userSelection) {
                 case "1":
-//                    new LoginScreen(new UserService(new UserRepository())).render();
                     app.getRouter().navigate("/login");
                     break;
                 case "2":

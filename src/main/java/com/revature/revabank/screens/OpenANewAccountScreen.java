@@ -1,16 +1,11 @@
 package com.revature.revabank.screens;
 
-import com.revature.revabank.exceptions.AuthenticationException;
-import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AccountType;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.services.AccountService;
-import com.revature.revabank.services.UserService;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import static com.revature.revabank.AppDriver.app;
@@ -29,9 +24,6 @@ public class OpenANewAccountScreen extends Screen {
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
         this.accountService = accountService;
-
-//        userService = new UserService();
-
     }
 
     /**
@@ -49,17 +41,6 @@ public class OpenANewAccountScreen extends Screen {
             System.out.println("1) Checking Account");
             System.out.println("2) Savings Account");
             System.out.println("3) Go Back");
-
-            /**
-             * Declare Account fields
-             */
-            Integer id;
-            Integer accountNumber;
-            List<AccountType> accountTypeList;
-            Double balance;
-            AppUser appUser;
-            AccountType accountType;
-            String holderName;
 
             try {
                 System.out.print("Selection: ");

@@ -1,16 +1,10 @@
 package com.revature.revabank.screens;
 
-import com.revature.revabank.exceptions.AuthenticationException;
-import com.revature.revabank.models.Account;
-import com.revature.revabank.models.AppUser;
-import com.revature.revabank.repos.AccountRepository;
-import com.revature.revabank.repos.UserRepository;
-
 import static com.revature.revabank.AppDriver.*;
 
 /**
- * To take appUsers to screen where they can interact with their accounts, the
- * dashboard screen render method asks the user what screen they want to go to.
+ * The dashboard screen render method asks the user what screen
+ * they want to go to and navigates to that screen.
  */
 public class DashboardScreen extends Screen {
 

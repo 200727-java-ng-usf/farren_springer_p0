@@ -1,6 +1,5 @@
 package com.revature.revabank.screens;
 
-import com.revature.revabank.services.AccountService;
 import com.revature.revabank.services.UserService;
 
 import java.io.IOException;
@@ -17,9 +16,6 @@ public class ProfileScreen extends Screen {
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
         this.userService = userService;
-
-//        userService = new UserService();
-
     }
 
     @Override
@@ -48,9 +44,6 @@ public class ProfileScreen extends Screen {
                     case "1":
                         // TODO call userRepo methods to edit information
                         app.getRouter().navigate("/editUserInfo");
-//                        System.out.println("Cannot edit user information for now...Going back to "
-//                                + app.getCurrentUser().getFirstName() + "'s Dashboard");
-//                        app.getRouter().navigate("/dashboard");
                         break;
                     case "2":
                         String confirmOrDeny = "N";
@@ -92,5 +85,5 @@ public class ProfileScreen extends Screen {
                 e.printStackTrace();
             }
         } // end while
-    }
-}
+    } // end render
+} // end class

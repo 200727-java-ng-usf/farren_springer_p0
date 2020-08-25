@@ -35,7 +35,9 @@ public class ConnectionFactory {
              * Load and Register the Driver.
              * Force the JVM to load the PostGreSQL JDBC driver
              */
-            Class.forName("org.postgresql.Driver");
+            Class.forName("org.postgresql.Driver"); // returns the Class object associated
+                                                    // with the class or interface with the
+                                                    // given string name, using the given class loader.
 
             /**
              * Create a Connection

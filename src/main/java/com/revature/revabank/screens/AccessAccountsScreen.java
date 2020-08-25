@@ -1,10 +1,8 @@
 package com.revature.revabank.screens;
 
-import com.revature.revabank.repos.AccountRepository;
 import com.revature.revabank.services.AccountService;
 
 import java.io.IOException;
-import java.util.Locale;
 import java.text.NumberFormat;
 
 import static com.revature.revabank.AppDriver.app;
@@ -25,8 +23,6 @@ public class AccessAccountsScreen extends Screen {
         // loosely coupled, because this class is not responsible for instantiation of a UserService
         this.accountService = accountService;
 
-//        userService = new UserService();
-
     }
 
     /**
@@ -44,7 +40,6 @@ public class AccessAccountsScreen extends Screen {
             accountService.showActiveAccounts(app.getCurrentUser().getId());
             System.out.println("1) Deposit Funds");
             System.out.println("2) Withdraw Funds");
-//            System.out.println("3) View Balances");
             System.out.println("3) Delete An Account");
             System.out.println("4) Go Back");
 
@@ -53,7 +48,7 @@ public class AccessAccountsScreen extends Screen {
                 userSelection = app.getConsole().readLine();
 
                 switch (userSelection) {
-                    case "1":
+                    case "1": // deposit funds case
 
                         Integer userSelectionInteger = 0;
                         Double depositAmount = 0.0d;
@@ -88,7 +83,7 @@ public class AccessAccountsScreen extends Screen {
                             app.getRouter().navigate("/dashboard");
                         }
                         break;
-                    case "2":
+                    case "2": // withdraw funds case
 
                         Integer userSelectionIntegerCase2 = 0;
                         Double withdrawalAmount = 0.0d;
@@ -117,17 +112,7 @@ public class AccessAccountsScreen extends Screen {
                             app.getRouter().navigate("/dashboard");
                         }
                         break;
-//                    case "3":
-//
-//                        accountService.showActiveAccounts(app.getCurrentUser().getId());
-//
-//                        System.out.println("Going back to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
-//
-//                        if (app.isSessionValid()) {
-//                            app.getRouter().navigate("/dashboard");
-//                        }
-//                        break;
-                    case "3":
+                    case "3": // delete accounts case
                         Integer userSelectionIntegerCase4 = 0;
                         String confirmOrDeny = "N";
 
