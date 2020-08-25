@@ -5,7 +5,6 @@ import com.revature.revabank.exceptions.InvalidRequestException;
 import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AppUser;
 import com.revature.revabank.models.Role;
-import com.revature.revabank.repos.AccountRepository;
 import com.revature.revabank.repos.UserRepository;
 
 import java.util.*;
@@ -70,6 +69,7 @@ public class UserService {
             throw new InvalidRequestException("User not found...");
         }
 
+        appUser.setEmail(newEmail);
         userRepo.updateEmail(newEmail, appUser.getId());
 
     }

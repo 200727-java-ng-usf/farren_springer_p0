@@ -224,7 +224,7 @@ public class UserRepository implements CrudRepository<AppUser>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE project0.app_users SET email = " + email + " WHERE id = " + id;
+            String sql = "UPDATE project0.app_users SET email = '" + email + "' WHERE id = " + id;
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
@@ -233,6 +233,9 @@ public class UserRepository implements CrudRepository<AppUser>{
 //            ResultSet rs = pstmt.getGeneratedKeys();
 //
 //            rs.next();
+//            UPDATE table_name
+//            SET column1 = value1, column2 = value2, ...
+//            WHERE condition;
 
 //            }
 

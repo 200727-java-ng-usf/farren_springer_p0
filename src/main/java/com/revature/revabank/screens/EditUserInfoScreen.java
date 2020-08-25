@@ -50,11 +50,11 @@ public class EditUserInfoScreen extends Screen {
 
                     case "2":
                         // TODO call updateEmail method
-                        System.out.println("Cannot edit email for now...");
-//                        System.out.println("Enter new email: ");
-//                        String newEmail = app.getConsole().readLine();
-//                        userService.updateEmail(newEmail, app.getCurrentUser());
-//                        System.out.println("Email updated to: " + app.getCurrentUser().getEmail());
+//                        System.out.println("Cannot edit email for now...");
+                        System.out.println("Enter new email: ");
+                        String newEmail = app.getConsole().readLine();
+                        userService.updateEmail(newEmail, app.getCurrentUser());
+                        System.out.println("Email updated to: " + app.getCurrentUser().getEmail());
                         System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         app.getRouter().navigate("/dashboard");
                         break;

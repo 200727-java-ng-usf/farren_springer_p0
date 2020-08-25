@@ -112,11 +112,11 @@ public class AccountServiceTests {
 
 //    @Test
 //    public void depositToValidAccount() throws IOException{
-//        // Arrange. Mock repo updatebalance, because we want the test to only test service updateBalance
+//        // Arrange. Mock repo updatebalance, because we want the test to only test service depositFunds
 //        Double expectedBalance = 200.00d;
 //        Account expectedAccount = new Account(6, AccountType.CHECKING, 6,300.00d);
-//        Mockito.when(mockAccountRepo.updateBalance(expectedAccount.getBalance(), expectedAccount.getId()))
-//                .thenReturn(Optional.of(expectedAccount));
+//        Mockito.when(mockAccountRepo.updateBalance(300.00d, 6))
+//                .thenReturn(null);
 //
 //        // Act
 //        sut.depositFunds(expectedAccount, 200.00d);
@@ -140,6 +140,10 @@ public class AccountServiceTests {
 //    @Test (expected = AccountAuthenticationException.class)
 //    public void deleteAccountForUserWithNoAccount() {
 //        // Arrange
+//        AppUser mockUser = new AppUser(9,"Spongebob", "Squarepants", "ssquare", "pants", "pants@gmail.com", Role.BASIC_MEMBER);
+//
+//        // Act
+//        sut.deleteAccount(app.getCurrentAccount());
 //
 //    }
 
