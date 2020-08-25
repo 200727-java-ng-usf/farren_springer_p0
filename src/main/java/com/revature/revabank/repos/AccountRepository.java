@@ -24,9 +24,9 @@ public class AccountRepository implements CrudRepository<Account>{
      * Extract common query clauses into a easily referenced member for reusability.
      * This base query selects all from the accounts table in schema project0
      */
-    private String baseQuery = "SELECT * FROM project0.accounts a "
-            + "JOIN project0.app_users au " +
-            "ON a.user_id = au.id ";
+    private String baseQuery = "SELECT * FROM project0.accounts a ";
+//            + "JOIN a " +
+//            "ON a.user_id = au.id ";
 
     /**
      * Constructor
@@ -48,18 +48,18 @@ public class AccountRepository implements CrudRepository<Account>{
                     "VALUES (?, ?, ?)";
 
             // second parameter here is used to indicate column names that will have generated values
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"});
-            pstmt.setString(1, account.getAccountType().toString());
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"}); // Uses the Connection object
+            pstmt.setString(1, account.getAccountType().toString()); // the first ? mark and what value it will be in the query
             pstmt.setDouble(2, account.getBalance());
             pstmt.setInt(3, app.getCurrentUser().getId());
 
-            int rowsInserted = pstmt.executeUpdate();
+            int rowsInserted = pstmt.executeUpdate(); // execute the prepared statement using Connection object that uses the db
 
             if (rowsInserted != 0) {
 
-                ResultSet rs = pstmt.getGeneratedKeys();
+                ResultSet rs = pstmt.getGeneratedKeys(); // get the primary keys created by a sequence
 
-                rs.next();
+                rs.next(); // iterate through the result set
                 account.setId(rs.getInt(1));
 
             }

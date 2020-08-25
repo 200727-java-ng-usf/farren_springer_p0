@@ -1,11 +1,11 @@
 package com.revature.revabank.models;
 
 import java.text.NumberFormat;
-import java.util.List;
 import java.util.Objects;
 
-import static com.revature.revabank.AppDriver.app;
-
+/**
+ * POJO
+ */
 public class Account {
 
     /**
@@ -23,17 +23,34 @@ public class Account {
         super();
     }
 
-
+    /**
+     * Two-args constructor
+     * @param accountType
+     * @param user_id
+     */
     public Account(AccountType accountType, Integer user_id) {
         this.accountType = accountType;
         this.user_id = user_id;
     }
 
+    /**
+     * Chained constructor
+     * @param accountType
+     * @param user_id
+     * @param balance
+     */
     public Account( AccountType accountType, Integer user_id, Double balance) {
         this(accountType, user_id);
         this.balance = balance;
     }
 
+    /**
+     * Full constructor, chained to other constructors
+     * @param id
+     * @param accountType
+     * @param user_id
+     * @param balance
+     */
     public Account(Integer id, AccountType accountType, Integer user_id, Double balance) {
         this(accountType, user_id, balance);
         this.id = id;
@@ -67,7 +84,6 @@ public class Account {
     /**
      * overridden Object methods
       */
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
