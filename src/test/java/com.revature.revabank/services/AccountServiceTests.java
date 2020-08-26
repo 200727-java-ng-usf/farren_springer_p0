@@ -2,6 +2,7 @@ package com.revature.revabank.services;
 
 import com.revature.revabank.exceptions.AccountAuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
+import com.revature.revabank.exceptions.ResourceNotFoundException;
 import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AccountType;
 import com.revature.revabank.repos.AccountRepository;
@@ -172,7 +173,7 @@ public class AccountServiceTests {
 
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ResourceNotFoundException.class)
     public void deleteInvalidAccount() {
         sut.deleteAccount(null);
     }

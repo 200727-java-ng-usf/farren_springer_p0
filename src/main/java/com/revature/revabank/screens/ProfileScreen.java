@@ -42,7 +42,6 @@ public class ProfileScreen extends Screen {
 
                 switch (userSelection) {
                     case "1":
-                        // TODO call userRepo methods to edit information
                         app.getRouter().navigate("/editUserInfo");
                         break;
                     case "2":

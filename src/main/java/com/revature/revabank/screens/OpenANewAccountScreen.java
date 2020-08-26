@@ -31,7 +31,6 @@ public class OpenANewAccountScreen extends Screen {
      */
     @Override
     public void render() {
-        // TODO try to create an account object
         String userSelection;
         System.out.println("Rendering " + app.getCurrentUser().getFirstName() + "'s Open New Account Screen...");
 

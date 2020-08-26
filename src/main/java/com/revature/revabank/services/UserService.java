@@ -69,7 +69,6 @@ public class UserService {
         }
 
         appUser.setEmail(newEmail);
-//        userRepo.updateEmail(newEmail, app.getCurrentUser().getId());
         userRepo.update(appUser);
 
     }
@@ -81,7 +80,6 @@ public class UserService {
         }
 
         appUser.setFirstName(newFirstName);
-//        userRepo.updateLastName(newLastName, appUser.getId());
         userRepo.update(appUser);
 
     }
@@ -93,7 +91,6 @@ public class UserService {
         }
 
         appUser.setLastName(newLastName);
-//        userRepo.updateLastName(newLastName, appUser.getId());
         userRepo.update(appUser);
 
     }
@@ -106,6 +103,7 @@ public class UserService {
         userRepo.deleteById(appUser.getId());
     }
 
+    // TODO other methods that might be useful
 //    public Set<AppUser> getAllUsers() {
 //        return new HashSet<>();
 //    }

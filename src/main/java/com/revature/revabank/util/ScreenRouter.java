@@ -1,5 +1,6 @@
 package com.revature.revabank.util;
 
+import com.revature.revabank.exceptions.ScreenNotFoundException;
 import com.revature.revabank.screens.Screen;
 
 import java.util.HashSet;
@@ -29,7 +30,7 @@ public class ScreenRouter {
         screens.stream()
                 .filter(screen -> screen.getRoute().equals(route))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("No screen found with that route."))
+                .orElseThrow(() -> new ScreenNotFoundException("No screen found with that route."))
                 .render();
     }
 

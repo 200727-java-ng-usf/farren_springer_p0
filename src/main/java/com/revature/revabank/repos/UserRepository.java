@@ -216,50 +216,8 @@ public class UserRepository implements CrudRepository<AppUser>{
 
     }
 
-
-
     /**
-     * UPDATE operation (now unnecessary bc of more generic update method
-     * @param email
-     * @param id
-     * @return
-     */
-//    public Optional<AppUser> updateEmail(String email, Integer id) {
-//
-//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-//
-//            String sql = "UPDATE project0.app_users SET email = '" + email + "' WHERE id = " + id;
-//
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.executeUpdate();
-//            pstmt.close();
-//
-//        } catch (SQLException sqle) {
-//            sqle.printStackTrace();
-//        }
-//
-//        return null;
-//    }
-
-//    public Optional<AppUser> updateLastName(String lastName, Integer id) {
-//
-//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-//
-//            String sql = "UPDATE project0.app_users SET last_name = '" + lastName + "' WHERE id = " + id;
-//
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.executeUpdate();
-//            pstmt.close();
-//
-//        } catch (SQLException sqle) {
-//            sqle.printStackTrace();
-//        }
-//
-//        return null;
-//    }
-
-    /**
-     * Generic update method to replace specific update methods
+     * UPDATE method to replace specific update methods
      */
     public boolean update(AppUser appUser) {
 
@@ -311,6 +269,7 @@ public class UserRepository implements CrudRepository<AppUser>{
 
         return false;
     }
+
     /**
      * To use in READ operations
      * @param rs
@@ -322,7 +281,7 @@ public class UserRepository implements CrudRepository<AppUser>{
         Set<AppUser> users = new HashSet<>();
 
         /**
-         * Extract results
+         * Extract results, set the temporary AppUser fields, and add the temp AppUser to the Set.
          */
         while (rs.next()) {
             AppUser temp = new AppUser();

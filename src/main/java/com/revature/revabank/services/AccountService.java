@@ -3,6 +3,7 @@ package com.revature.revabank.services;
 import com.revature.revabank.exceptions.AccountAuthenticationException;
 import com.revature.revabank.exceptions.AuthenticationException;
 import com.revature.revabank.exceptions.InvalidRequestException;
+import com.revature.revabank.exceptions.ResourceNotFoundException;
 import com.revature.revabank.models.Account;
 
 import com.revature.revabank.repos.AccountRepository;
@@ -109,7 +110,6 @@ public class AccountService {
 
         account.setBalance(account.getBalance() + amount);
         System.out.println("Depositing " + defaultFormat.format(amount) + " into account #" + account.getId());
-//        accountRepo.updateBalance(account.getBalance(), account.getId());
         accountRepo.update(account);
     }
 
@@ -134,7 +134,6 @@ public class AccountService {
         }
         account.setBalance(account.getBalance() - amount);
         System.out.println("Withdrawing " + defaultFormat.format(amount) + " from account #" + account.getId());
-        // instead of saving, we want to edit the information in the db
         accountRepo.update(account);
     }
 
@@ -143,6 +142,9 @@ public class AccountService {
      * @param account
      */
     public void deleteAccount(Account account) {
+        if (account == null ) {
+            throw new ResourceNotFoundException("The Account does not exist!");
+        }
         accountRepo.deleteById(account.getId());
     }
 

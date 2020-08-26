@@ -17,14 +17,14 @@ import java.util.stream.Collectors;
 import static com.revature.revabank.AppDriver.app;
 
 /**
- * AccountRepository contains methods that access the db through SQL query result sets.
+ * AccountRepository has methods that access the db through SQL query result sets.
  * The query sets create, read, update, or delete information from the accounts table
  * in project0.sql.
  */
 public class AccountRepository implements CrudRepository<Account>{
 
     /**
-     * Extract common query clauses into a easily referenced member for reusability.
+     * Extract common query clauses into a easily referenced member for re-usability.
      * This base query selects all from the accounts table in schema project0
      */
     private String baseQuery = "SELECT * FROM project0.accounts a ";
@@ -63,7 +63,8 @@ public class AccountRepository implements CrudRepository<Account>{
                 ResultSet rs = pstmt.getGeneratedKeys(); // get the primary keys created by a sequence
 
                 rs.next(); // iterate through the result set
-                account.setId(rs.getInt(1));
+                account.setId(rs.getInt(1)); // get the first column from the db and
+                                                        // assign it to the id of the account object
 
             }
 
