@@ -104,9 +104,20 @@ public class AccessAccountsScreen extends Screen {
 
                         try {
                             withdrawalAmount = Double.parseDouble(app.getConsole().readLine());
+                            while(withdrawalAmount < 0.00d || withdrawalAmount > app.getCurrentAccount().getBalance()) {
+                                System.out.println("You cannot withdraw that! Try again...");
+                                System.out.println("How much would you like to withdraw:");
+                                withdrawalAmount = Double.parseDouble(app.getConsole().readLine());
+                            }
+
                         } catch (Exception e) { // TODO custom exception
                             System.out.println("You did not enter an amount.");
                         }
+//                        try {
+//                            withdrawalAmount = Double.parseDouble(app.getConsole().readLine());
+//                        } catch (Exception e) { // TODO custom exception
+//                            System.out.println("You did not enter an amount.");
+//                        }
 
                         accountService.withdrawFunds(app.getCurrentAccount(), withdrawalAmount);
 

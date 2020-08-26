@@ -127,11 +127,11 @@ public class AccountService {
         /**
          * To check for overdraw, use an if statement
          */
-        while (amount > account.getBalance() || amount < 0.0d) {
-            System.out.println("Invalid amount! Try again...");
-            System.out.println("How much would you like to withdraw: ");
-            amount = Double.valueOf(app.getConsole().readLine());
-        }
+//        while (amount > account.getBalance() || amount < 0.0d) {
+//            System.out.println("Invalid amount! Try again...");
+//            System.out.println("How much would you like to withdraw: ");
+//            amount = Double.valueOf(app.getConsole().readLine());
+//        }
         account.setBalance(account.getBalance() - amount);
         System.out.println("Withdrawing " + defaultFormat.format(amount) + " from account #" + account.getId());
         accountRepo.update(account);
