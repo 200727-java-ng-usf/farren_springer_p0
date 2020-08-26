@@ -97,6 +97,7 @@ public class AccountService {
     }
 
     /**
+     * UPDATE operation
      * To set the balance field of the currentAccount to the new balance,
      * the depositFunds method validates that the amount is not negative.
      * Then, it calls the updateBalance method to update the database.
@@ -105,17 +106,15 @@ public class AccountService {
      * @throws IOException
      */
     public void depositFunds(Account account, Double amount) throws IOException {
-        while (amount < 0.0d) {
-            System.out.println("You cannot deposit negative funds! Try again...");
-            System.out.println("How much would you like to deposit: ");
-            amount = Double.valueOf(app.getConsole().readLine());
-        }
+
         account.setBalance(account.getBalance() + amount);
         System.out.println("Depositing " + defaultFormat.format(amount) + " into account #" + account.getId());
-        accountRepo.updateBalance(account.getBalance(), account.getId());
+//        accountRepo.updateBalance(account.getBalance(), account.getId());
+        accountRepo.update(account);
     }
 
     /**
+     * UPDATE operation
      * To set the balance field of the currentAccount to the new balance,
      * the withdrawFunds method validates that the amount is not negative or
      * more than the current balance.
@@ -136,9 +135,13 @@ public class AccountService {
         account.setBalance(account.getBalance() - amount);
         System.out.println("Withdrawing " + defaultFormat.format(amount) + " from account #" + account.getId());
         // instead of saving, we want to edit the information in the db
-        accountRepo.updateBalance(account.getBalance(), account.getId());
+        accountRepo.update(account);
     }
 
+    /**
+     * DELETE operation
+     * @param account
+     */
     public void deleteAccount(Account account) {
         accountRepo.deleteById(account.getId());
     }

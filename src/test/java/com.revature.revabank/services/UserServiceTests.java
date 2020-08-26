@@ -127,6 +127,16 @@ public class UserServiceTests {
         sut.updateEmail("", null);
     }
 
+    @Test (expected = InvalidRequestException.class)
+    public void updateFirstNameWithInvalidUser() {
+        sut.updateFirstName("", null);
+    }
+
+    @Test (expected = InvalidRequestException.class)
+    public void updateLastNameWithInvalidUser() {
+        sut.updateLastName("", null);
+    }
+
 //    @Test
 //    public void updateEmailWithValidUser() {
 //        // Arrange

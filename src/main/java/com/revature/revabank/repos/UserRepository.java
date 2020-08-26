@@ -53,7 +53,7 @@ public class UserRepository implements CrudRepository<AppUser>{
             pstmt.setString(5, newUser.getEmail());
             pstmt.setInt(6, newUser.getRole().ordinal() + 1);
 
-            int rowsInserted = pstmt.executeUpdate();
+            int rowsInserted = pstmt.executeUpdate(); // returns an int that represents the #rows inserted
 
             if (rowsInserted != 0) {
 
@@ -219,52 +219,71 @@ public class UserRepository implements CrudRepository<AppUser>{
 
 
     /**
-     * UPDATE operation
+     * UPDATE operation (now unnecessary bc of more generic update method
      * @param email
      * @param id
      * @return
      */
-    public static Optional<AppUser> updateEmail(String email, Integer id) {
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = "UPDATE project0.app_users SET email = '" + email + "' WHERE id = " + id;
-
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.executeUpdate();
-            pstmt.close();
-
-//            ResultSet rs = pstmt.getGeneratedKeys();
+//    public Optional<AppUser> updateEmail(String email, Integer id) {
 //
-//            rs.next();
-//            UPDATE table_name
-//            SET column1 = value1, column2 = value2, ...
-//            WHERE condition;
+//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+//
+//            String sql = "UPDATE project0.app_users SET email = '" + email + "' WHERE id = " + id;
+//
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.executeUpdate();
+//            pstmt.close();
+//
+//        } catch (SQLException sqle) {
+//            sqle.printStackTrace();
+//        }
+//
+//        return null;
+//    }
 
-//            }
+//    public Optional<AppUser> updateLastName(String lastName, Integer id) {
+//
+//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+//
+//            String sql = "UPDATE project0.app_users SET last_name = '" + lastName + "' WHERE id = " + id;
+//
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.executeUpdate();
+//            pstmt.close();
+//
+//        } catch (SQLException sqle) {
+//            sqle.printStackTrace();
+//        }
+//
+//        return null;
+//    }
 
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public static Optional<AppUser> updateLastName(String lastName, Integer id) {
+    /**
+     * Generic update method to replace specific update methods
+     */
+    public boolean update(AppUser appUser) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE project0.app_users SET last_name = '" + lastName + "' WHERE id = " + id;
+            String sql = "UPDATE project0.app_users "
+                    + "SET email = '" + appUser.getEmail() + "', "
+                    + "username = '" + appUser.getUsername() + "', "
+                    + "password = '" + appUser.getPassword() + "', "
+                    + "first_name = '" + appUser.getFirstName() + "', "
+                    + "last_name = '" + appUser.getLastName() + "' "
+//                    + "', "
+//                    + "role_id = " + appUser.getRole() + " " // role is a number
+                    + "WHERE id = " + appUser.getId();
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.executeUpdate();
+            pstmt.executeUpdate(); //
             pstmt.close();
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
 
-        return null;
+        return true;
     }
 
     /**

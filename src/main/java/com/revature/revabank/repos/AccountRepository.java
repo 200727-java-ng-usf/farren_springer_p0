@@ -2,6 +2,7 @@ package com.revature.revabank.repos;
 
 import com.revature.revabank.models.Account;
 import com.revature.revabank.models.AccountType;
+import com.revature.revabank.models.AppUser;
 import com.revature.revabank.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -229,15 +230,17 @@ public class AccountRepository implements CrudRepository<Account>{
      * UPDATE operation
      * To update the balance column in the accounts table from the project0 schema in the
      * database, updateBalance uses the new balance and the account's id.
-     * @param balance
-     * @param accountId
+     * @param account
      * @return
      */
-    public static Optional<Account> updateBalance(Double balance, Integer accountId) {
+    public boolean update(Account account) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE project0.accounts SET balance = " + balance + " WHERE id = " + accountId;
+            /**
+             * The only information that can be changed for accounts is the balance.
+             */
+            String sql = "UPDATE project0.accounts SET balance = " + account.getBalance() + " WHERE id = " + account.getId();
 
             // second parameter here is used to indicate column names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -253,7 +256,7 @@ public class AccountRepository implements CrudRepository<Account>{
             sqle.printStackTrace();
         }
 
-        return null;
+        return true;
     }
 
     /**

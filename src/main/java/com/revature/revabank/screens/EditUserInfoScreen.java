@@ -28,17 +28,26 @@ public class EditUserInfoScreen extends Screen {
 
             System.out.println("\n+---------------------------------+\n");
             System.out.println("Select information to update:");
-            System.out.println("1) Last Name: " + app.getCurrentUser().getLastName());
-            System.out.println("2) Email: " + app.getCurrentUser().getEmail());
-            System.out.println("3) Go Back");
+            System.out.println("1) First Name: " + app.getCurrentUser().getFirstName());
+            System.out.println("2) Last Name: " + app.getCurrentUser().getLastName());
+            System.out.println("3) Email: " + app.getCurrentUser().getEmail());
+            System.out.println("4) Go Back");
 
             try {
                 System.out.print("Selection: ");
                 userSelection = app.getConsole().readLine();
 
                 switch (userSelection) {
-                    case "1": // change last name
-                        // TODO call userRepo method to update last name
+                    case "1": // change first name
+                        System.out.println("Enter new first name: ");
+                        String newFirstName = app.getConsole().readLine();
+                        userService.updateFirstName(newFirstName, app.getCurrentUser());
+                        System.out.println("First name updated to: " + app.getCurrentUser().getFirstName());
+                        System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
+                        app.getRouter().navigate("/dashboard");
+                        break;
+
+                    case "2": // change last name
                         System.out.println("Enter new last name: ");
                         String newLastName = app.getConsole().readLine();
                         userService.updateLastName(newLastName, app.getCurrentUser());
@@ -47,9 +56,7 @@ public class EditUserInfoScreen extends Screen {
                         app.getRouter().navigate("/dashboard");
                         break;
 
-                    case "2": // change email
-                        // TODO call updateEmail method
-//                        System.out.println("Cannot edit email for now...");
+                    case "3": // change email
                         System.out.println("Enter new email: ");
                         String newEmail = app.getConsole().readLine();
                         userService.updateEmail(newEmail, app.getCurrentUser());
@@ -57,7 +64,7 @@ public class EditUserInfoScreen extends Screen {
                         System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         app.getRouter().navigate("/dashboard");
                         break;
-                    case "3": // go back
+                    case "4": // go back
                         System.out.println("Returning to " + app.getCurrentUser().getFirstName() + "'s Dashboard...");
                         app.getRouter().navigate("/dashboard");
                     default:

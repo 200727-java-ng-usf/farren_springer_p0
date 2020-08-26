@@ -69,7 +69,20 @@ public class UserService {
         }
 
         appUser.setEmail(newEmail);
-        userRepo.updateEmail(newEmail, appUser.getId());
+//        userRepo.updateEmail(newEmail, app.getCurrentUser().getId());
+        userRepo.update(appUser);
+
+    }
+
+    public void updateFirstName(String newFirstName, AppUser appUser) {
+
+        if (!isUserValid(appUser)) {
+            throw new InvalidRequestException("User not found...");
+        }
+
+        appUser.setFirstName(newFirstName);
+//        userRepo.updateLastName(newLastName, appUser.getId());
+        userRepo.update(appUser);
 
     }
 
@@ -80,7 +93,8 @@ public class UserService {
         }
 
         appUser.setLastName(newLastName);
-        userRepo.updateLastName(newLastName, appUser.getId());
+//        userRepo.updateLastName(newLastName, appUser.getId());
+        userRepo.update(appUser);
 
     }
 

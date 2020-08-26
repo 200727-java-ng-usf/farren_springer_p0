@@ -157,6 +157,26 @@ public class AccountServiceTests {
         assertEquals("hello", outContent.toString());
     }
 
+    @Test
+    public void registerAccountSetsCurrentAccount() {
+
+        // Arrange. Mock findAccountByCredentials, because we want the test to only test authenticate
+        Account expectedAccount = new Account(5, AccountType.CHECKING, 4,300.00d);
+
+        // Act
+        sut.register(expectedAccount);
+        Account actualResult = app.getCurrentAccount();
+
+        // Assert
+        Assert.assertEquals(expectedAccount, actualResult);
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void deleteInvalidAccount() {
+        sut.deleteAccount(null);
+    }
+
 //    @Test
 //    public void accountFoundUsingAccountId() {
 //        // arrange and act
@@ -164,6 +184,8 @@ public class AccountServiceTests {
 //    }
 
     // TODO tests on deleteAccount
+    // get to repo call
+    // expect method in Mockito
 
 
 }

@@ -28,9 +28,7 @@ public interface CrudRepository<T> {
      * @param t
      * @return
      */
-//    boolean update(T t); // made individual updates for separate fields for now
-    // TODO one method for all updates in each repository. Then, user service
-    //  would call this method after using a setter on the object for different fields of AppUser.
+    boolean update(T t);
 
     /**
      * DELETE

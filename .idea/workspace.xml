@@ -29,7 +29,21 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3818051-fa09-4f66-8a11-57c33ff4fff3" name="Default Changelist" comment="" />
+    <list default="true" id="c3818051-fa09-4f66-8a11-57c33ff4fff3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/CrudRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/CrudRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/repos/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/AccessAccountsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/AccessAccountsScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/EditUserInfoScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/screens/EditUserInfoScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/services/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/services/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/revabank/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/revabank/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com.revature.revabank/services/AccountServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com.revature.revabank/services/AccountServiceTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com.revature.revabank/services/UserServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com.revature.revabank/services/UserServiceTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/revabank/repos/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/revabank/repos/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/revabank/screens/EditUserInfoScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/revabank/screens/EditUserInfoScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/revabank/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/revabank/services/UserService.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,7 +80,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Application.AppDriver">
+  <component name="RunManager" selected="JUnit.AccountServiceTests and 1 more">
     <configuration name="AppDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.revature.revabank.AppDriver" />
       <module name="revabank" />
@@ -80,20 +94,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AccountServiceTests and 3 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AccountServiceTests and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="revabank" />
       <option name="TEST_OBJECT" value="pattern" />
       <patterns>
         <pattern testClass="com.revature.revabank.services.AccountServiceTests" />
         <pattern testClass="com.revature.revabank.services.UserServiceTests" />
-        <pattern testClass="com.revature.revabank.util.*" />
-        <pattern testClass="com.revature.revabank.util.ConnectionFactoryTest" />
       </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AccountServiceTests.balanceChangesAfterWithdraw" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AccountServiceTests.deleteInvalidAccount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="revabank" />
       <extension name="coverage">
         <pattern>
@@ -103,13 +115,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.revature.revabank.services" />
       <option name="MAIN_CLASS_NAME" value="com.revature.revabank.services.AccountServiceTests" />
-      <option name="METHOD_NAME" value="balanceChangesAfterWithdraw" />
+      <option name="METHOD_NAME" value="deleteInvalidAccount" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AccountServiceTests.deleteAccountForUserWithNoAccount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AccountServiceTests.registerAccountSetsCurrentAccount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="revabank" />
       <extension name="coverage">
         <pattern>
@@ -119,13 +131,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.revature.revabank.services" />
       <option name="MAIN_CLASS_NAME" value="com.revature.revabank.services.AccountServiceTests" />
-      <option name="METHOD_NAME" value="deleteAccountForUserWithNoAccount" />
+      <option name="METHOD_NAME" value="registerAccountSetsCurrentAccount" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AccountServiceTests.deleteAccountTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTests.updateFirstNameWithInvalidUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="revabank" />
       <extension name="coverage">
         <pattern>
@@ -134,8 +146,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.revature.revabank.services" />
-      <option name="MAIN_CLASS_NAME" value="com.revature.revabank.services.AccountServiceTests" />
-      <option name="METHOD_NAME" value="deleteAccountTest" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.revabank.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="updateFirstNameWithInvalidUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -143,11 +155,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AccountServiceTests and 1 more" />
+        <item itemvalue="JUnit.AccountServiceTests.deleteInvalidAccount" />
+        <item itemvalue="JUnit.AccountServiceTests.registerAccountSetsCurrentAccount" />
+        <item itemvalue="JUnit.UserServiceTests.updateFirstNameWithInvalidUser" />
         <item itemvalue="Application.AppDriver" />
-        <item itemvalue="JUnit.AccountServiceTests.balanceChangesAfterWithdraw" />
-        <item itemvalue="JUnit.AccountServiceTests.deleteAccountTest" />
-        <item itemvalue="JUnit.AccountServiceTests.deleteAccountForUserWithNoAccount" />
-        <item itemvalue="JUnit.AccountServiceTests and 3 more" />
       </list>
     </recent_temporary>
   </component>
@@ -203,25 +215,29 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1230" y="58" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598118320489" />
-    <state width="1877" height="262" key="GridCell.Tab.0.bottom" timestamp="1598368480083">
+    <state x="-913" y="247" key="FileChooserDialogImpl" timestamp="1598390595297">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="262" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598368480083" />
+    <state x="-913" y="247" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598390595297" />
+    <state width="1877" height="262" key="GridCell.Tab.0.bottom" timestamp="1598404751043">
+      <screen x="-1920" y="-209" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="262" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598404751043" />
     <state width="914" height="260" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1598293060995" />
-    <state width="1877" height="262" key="GridCell.Tab.0.center" timestamp="1598368480082">
+    <state width="1877" height="262" key="GridCell.Tab.0.center" timestamp="1598404751043">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="262" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598368480082" />
+    <state width="1877" height="262" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598404751043" />
     <state width="914" height="260" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1598293060995" />
-    <state width="1877" height="262" key="GridCell.Tab.0.left" timestamp="1598368480082">
+    <state width="1877" height="262" key="GridCell.Tab.0.left" timestamp="1598404751043">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="262" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598368480082" />
+    <state width="1877" height="262" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598404751043" />
     <state width="914" height="260" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1598293060995" />
-    <state width="1877" height="262" key="GridCell.Tab.0.right" timestamp="1598368480083">
+    <state width="1877" height="262" key="GridCell.Tab.0.right" timestamp="1598404751043">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="262" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598368480083" />
+    <state width="1877" height="262" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598404751043" />
     <state width="914" height="260" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1598293060995" />
     <state x="-967" y="-209" width="974" height="1047" key="dock-window-1" timestamp="1598105603189">
       <screen x="-1920" y="-209" width="1920" height="1040" />
@@ -231,6 +247,10 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1253" y="-90" width="585" height="801" key="find.popup/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598296413164" />
+    <state x="-1310" y="153" key="new project wizard" timestamp="1598390606438">
+      <screen x="-1920" y="-209" width="1920" height="1040" />
+    </state>
+    <state x="-1310" y="153" key="new project wizard/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598390606438" />
     <state x="-1564" y="72" key="refactoring.ChangeSignatureDialog" timestamp="1598119811177">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
@@ -256,7 +276,7 @@
     <SUITE FILE_PATH="coverage/farren_springer_p0$AccountServiceTests_withdrawNegativeFunds.ic" NAME="AccountServiceTests.withdrawNegativeFunds Coverage Results" MODIFIED="1598197342035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.revature.revabank.services.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/farren_springer_p0$AccountServiceTests_and_1_more.ic" NAME="AccountServiceTests and 1 more Coverage Results" MODIFIED="1598289565535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/farren_springer_p0$AccountServiceTests_and_1_more.ic" NAME="AccountServiceTests and 1 more Coverage Results" MODIFIED="1598404750892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/farren_springer_p0$AccountServiceTests_registerWithNullObject.ic" NAME="AccountServiceTests.registerWithNullObject Coverage Results" MODIFIED="1598196732666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.revature.revabank.services.*</FILTER>
     </SUITE>

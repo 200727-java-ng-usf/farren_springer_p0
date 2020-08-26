@@ -7,6 +7,7 @@ import java.text.NumberFormat;
 
 import static com.revature.revabank.AppDriver.app;
 
+// TODO documentation on methods (param...etc)
 public class AccessAccountsScreen extends Screen {
 
     /**
@@ -69,6 +70,11 @@ public class AccessAccountsScreen extends Screen {
                          */
                         try {
                             depositAmount = Double.parseDouble(app.getConsole().readLine());
+                            while(depositAmount < 0.00d) {
+                                System.out.println("You cannot deposit negative funds! Try again...");
+                                System.out.println("How much would you like to deposit:");
+                                depositAmount = Double.parseDouble(app.getConsole().readLine());
+                            }
                         } catch (Exception e) { // TODO custom exception
                             System.out.println("You did not enter an amount.");
                         }
@@ -107,6 +113,7 @@ public class AccessAccountsScreen extends Screen {
                         System.out.println(app.getCurrentAccount());
 
                         System.out.println("Transaction complete...navigating to Dashboard...");
+                        // wrap more logic in try so that it doesn't proceed on.
 
                         if (app.isSessionValid()) {
                             app.getRouter().navigate("/dashboard");
