@@ -20,7 +20,7 @@ public class OpenANewAccountScreen extends Screen {
     // Inject the dependency through the constructor (constructor injection)
     public OpenANewAccountScreen(AccountService accountService) {
         super("OpenANewAccount", "/openANewAccount");
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
         this.accountService = accountService;

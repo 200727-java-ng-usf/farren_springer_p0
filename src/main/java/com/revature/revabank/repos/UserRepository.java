@@ -30,7 +30,8 @@ public class UserRepository implements CrudRepository<AppUser>{
      * Constructor
      */
     public UserRepository() {
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
     /**

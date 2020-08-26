@@ -14,7 +14,7 @@ public class LoginScreen extends Screen {
     // Inject the dependency through the constructor (constructor injection)
     public LoginScreen(UserService userService) {
         super("LoginScreen", "/login");
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
         this.userService = userService;

@@ -20,7 +20,7 @@ public class AppState {
     private Account currentAccount;
 
     public AppState() {
-        System.out.println("[LOG] - Initializing application...");
+//        System.out.println("[LOG] - Initializing application...");
 
         appRunning = true;
         console = new BufferedReader(new InputStreamReader(System.in));
@@ -40,7 +40,7 @@ public class AppState {
                 .addScreen(new ProfileScreen(userService))
                 .addScreen(new EditUserInfoScreen(userService));
 
-        System.out.println("[LOG] - Application initialization complete.");
+//        System.out.println("[LOG] - Application initialization complete.");
 
     }
 

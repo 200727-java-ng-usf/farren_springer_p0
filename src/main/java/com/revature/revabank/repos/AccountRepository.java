@@ -35,7 +35,8 @@ public class AccountRepository implements CrudRepository<Account>{
      * Constructor
      */
     public AccountRepository() {
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
     /**

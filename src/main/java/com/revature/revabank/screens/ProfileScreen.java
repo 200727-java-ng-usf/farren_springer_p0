@@ -12,7 +12,7 @@ public class ProfileScreen extends Screen {
 
     public ProfileScreen(UserService userService) {
         super("ProfileScreen", "/profile");
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
         this.userService = userService;

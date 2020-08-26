@@ -12,7 +12,7 @@ public class RegisterScreen extends Screen {
 
     public RegisterScreen(UserService userService) {
         super("RegisterScreen", "/register");
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
         this.userService = userService;
     }
 

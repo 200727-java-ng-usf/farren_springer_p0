@@ -12,7 +12,7 @@ public class EditUserInfoScreen extends Screen {
 
     public EditUserInfoScreen(UserService userService) {
         super("EditUserInfoScreen", "/editUserInfo");
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
 
         // loosely coupled, because this class is not responsible for instantiation of a UserService
         this.userService = userService;

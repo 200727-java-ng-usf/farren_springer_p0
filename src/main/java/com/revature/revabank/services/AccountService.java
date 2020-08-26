@@ -19,7 +19,7 @@ public class AccountService {
     NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(); // for currencies
 
     public AccountService(AccountRepository repo) {
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
         accountRepo = repo;
     }
 
